@@ -7,7 +7,7 @@ var mongoose =   require('mongoose'),
     momentDate = require('../utils/moment-date');
 
 var authorizationSchema = new Schema({
-  app: { type: ObjectId, ref: 'App' },
+  app: { type: Schema.Types.ObjectId, ref: 'App' },
   session_key: String,
   expires: String,
   time_stamp: { type: String, default: new momentDate() }

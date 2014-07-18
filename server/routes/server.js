@@ -1,3 +1,5 @@
+var express = require('express');
+
 module.exports = function(app) {
   var serverRouter = express.Router();
   serverRouter.get('/', function(req, res) {

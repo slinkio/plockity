@@ -1,9 +1,9 @@
-var moment = require('moment'),
-    jwt =    require('jwt-simple'),
-    App =    require('../models/app'),
+var moment        = require('moment'),
+    jwt           = require('jwt-simple'),
+    App           = require('../models/app'),
     Authorization = require('../models/authorization'),
-    keygen = require('keygenerator'),
-    _ =      require('lodash');
+    keygen        = require('keygenerator'),
+    _             = require('lodash');
 
 function authExpiration () {
   return moment().add('days', 1).format("YYYY-MM-DD HH:mm:ss");
@@ -11,7 +11,7 @@ function authExpiration () {
 
 exports.checkAuthorization = function (req, res, next) {
   // Grab the app_key from the request
-  var key = req.app_key,
+  var key = req.query.app_key;
 
   // If there is no key, we send a 401 Unauthorized.
   if(!key) {

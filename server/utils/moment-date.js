@@ -4,4 +4,6 @@
 
 var moment = require('moment');
 
-module.exports = moment().format("YYYY-MM-DD HH:mm:ss");
+module.exports = function () {
+  return moment().format("YYYY-MM-DD HH:mm:ss");
+}

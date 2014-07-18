@@ -8,14 +8,14 @@ var mongoose =   require('mongoose'),
 
 var appSchema = new Schema({
   name:      String,
-  creator:   ObjectId,
+  creator:   Schema.Types.ObjectId,
   active:    Boolean,
   purchased: {
     product: String,
     expiry:  String
-  }
+  },
   requests:  Number,
-  time_stamp: { type: String, default: new momentDate() }
+  time_stamp: { type: String, default: momentDate() }
 });
 
 module.exports = mongoose.model('App', appSchema);

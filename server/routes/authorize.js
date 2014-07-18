@@ -1,9 +1,10 @@
-var authorizeHandler = require('../handlers/authorize');
+var express          = require('express'),
+    authorizeHandler = require('../handlers/authorize');
 
-module.exports = function(app) {
+module.exports = function (app) {
   var authorizeRouter = express.Router();
 
-  authorizeRouter.get('/', checkAuthorization, sendGenerateToken);
+  authorizeRouter.get('/', authorizeHandler.checkAuthorization, authorizeHandler.sendGenerateToken);
   
   app.use('/api/authorize', authorizeRouter);
 };
