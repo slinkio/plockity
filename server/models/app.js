@@ -9,6 +9,7 @@ var mongoose =   require('mongoose'),
 var appSchema = new Schema({
   name:      String,
   creator:   ObjectId,
+  active:    Boolean,
   purchased: {
     product: String,
     expiry:  String
