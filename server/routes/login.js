@@ -7,5 +7,5 @@ module.exports = function (app) {
 
   loginRouter.post('/', loginHandler.login, sessionHandler.sendGenerateToken);
   
-  app.use('/api/login', sessionRouter);
+  app.use('/api/login', loginRouter);
 };

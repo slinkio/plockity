@@ -50,7 +50,6 @@ exports.login = function (req, res, next) {
           error: 'Incorrect password'
         });
       }
-    })
-
+    });
   });
 }
