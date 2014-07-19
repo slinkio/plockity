@@ -1,0 +1,29 @@
+/*
+  Footer Styles
+*/
+
+@footer-padding:           10px;
+@footer-background:        rgba(255, 255, 255, 0.35);
+@footer-background-hover:  rgba(red(@brand-primary), green(@brand-primary), blue(@brand-primary), 0.8);
+
+footer.app-footer {
+  position: relative;
+  width: 100%;
+  background-color: @footer-background;
+  padding: @footer-padding;
+  text-align: center;
+  z-index: 1;
+
+  .transition(~'all ease-in-out .4s');
+
+  p {
+    color: white;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+    margin: 0;
+  }
+
+  &:hover {
+    color: @brand-offwhite !important;
+    background-color: @footer-background-hover;
+  }
+}

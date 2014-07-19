@@ -1,0 +1,77 @@
+/*
+	Global Styles
+*/
+
+* {
+  margin: 0;
+}
+
+body, html, .app-view {
+  height: 100%;
+  background-color: @brand-offwhite;
+}
+
+@footer-height: 42px;
+
+.app-wrapper {
+  position: relative;
+  min-height: 800px;
+  /* equal to footer height */
+  margin-bottom: 0 - @footer-height;
+
+  &:after {
+    height: @footer-height;
+    content: "";
+    display: block;
+  }
+}
+
+.help {
+  display: block;
+  width: 100%;
+  font-size: 80%;
+
+  a {
+    color: @brand-default;
+
+    &:hover {
+      text-decoration: none;
+      color: lighten(@brand-default, 25%);
+    }
+  }
+  &.help-right {
+    text-align: right;
+  }
+}
+
+a {
+  color: @brand-primary;
+  text-decoration: none !important;
+
+  &.light {
+    color: darken(@brand-info, 20%);
+
+    &:hover {
+      color: @brand-info;
+    }
+  }
+
+  .transition(~"all ease-in-out 0.35s");
+
+  &:hover {
+    color: lighten(@brand-primary, 20%);
+  }
+}
+
+.hide-slide {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+
+  .transition(~"opacity ease-in-out 0.4s, max-height ease-in-out 0.25s");
+  
+  &.show {
+    opacity: 1;
+    max-height: 400px;
+  }
+}

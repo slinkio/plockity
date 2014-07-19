@@ -1,0 +1,62 @@
+/*
+  Global Input Styles
+*/
+
+/* Inner Input Addons */
+.left-inner-addon {
+  position: relative;
+
+  input {
+    padding-left: 30px;
+  }
+
+  > i, span {
+    position: absolute;
+    top: 0;
+    padding: 10px 12px;
+    pointer-events: none;
+  }
+}
+
+.right-inner-addon {
+  position: relative;
+  
+  input {
+    padding-right: 30px;
+  }
+
+  i, span {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+  }
+}
+
+.right-inner-text-addon {
+  position: relative;
+
+  input {
+    padding-right: 30px; 
+  }
+  
+  span.text-addon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    padding: 6px 7px;
+    font-weight: 100;
+    max-width: 150px;
+    overflow: hidden;
+
+    &.success {
+      color: lighten(@brand-success, 20%);
+    }
+
+    &.danger {
+      color: lighten(@brand-danger, 20%);
+    }
+  }
+}
