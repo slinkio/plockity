@@ -11,11 +11,24 @@ body, html, .app-view {
   background-color: @brand-offwhite;
 }
 
-@footer-height: 42px;
+.selection-style() {
+  text-shadow: none;
+  background-color: @brand-green-5;
+  color: @brand-offwhite;
+}
+
+::-moz-selection {
+  .selection-style();
+}
+::selection {
+  .selection-style();
+}
+
+@footer-height: 165px;
 
 .app-wrapper {
   position: relative;
-  min-height: 800px;
+  min-height: 100%;
   /* equal to footer height */
   margin-bottom: 0 - @footer-height;
 
@@ -74,4 +87,10 @@ a {
     opacity: 1;
     max-height: 400px;
   }
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  padding: 5px 10px;
+  max-width: 1400px;
 }

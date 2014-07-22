@@ -5,24 +5,62 @@
 .hero {
   width: 100%;
   height: 50%;
-  min-height: 300px;
+  min-height: 500px;
 
   &.hero-frontpage {
-    background:
-      linear-gradient(
-        @brand-green-1,
-        transparent
-      ),
-      linear-gradient(
-        90deg,
-        @brand-green-2,
-        transparent
-      ),
-      linear-gradient(
-        -90deg,
-        @brand-green-3,
-        transparent
-      );
-    background-blend-mode: screen;
+    position: relative;
+    margin-top: -52px;
+
+    .skew(0, -2deg);
+    .backface-visibility(hidden);
+
+    .initial-bg, .next-bg {
+      position: absolute;
+      .trbl();
+    }
+
+    .initial-bg {
+      .animation(backgroundindex 8s infinite);
+      background:
+        linear-gradient(
+          @brand-green-1,
+          transparent
+        ),
+        linear-gradient(
+          90deg,
+          @brand-green-3,
+          transparent
+        ),
+        linear-gradient(
+          -90deg,
+          @brand-green-5,
+          transparent
+        );
+    }
+
+    .next-bg {
+      opacity: 0;
+      .animation(backgroundindex 8s 4s infinite);
+      background:
+        linear-gradient(
+          @brand-green-1,
+          transparent
+        ),
+        linear-gradient(
+          90deg,
+          @brand-green-3,
+          transparent
+        ),
+        linear-gradient(
+          -90deg,
+          @brand-green-5,
+          transparent
+        );
+    }
+
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAIklEQVQIW2NkwAIYkcR8gOwtID5MECRgDMRnQRJ4VaKYDADAYAQGjsU6FwAAAABJRU5ErkJggg==) repeat;
+
+    .box-shadow(0 0 7px fade(@brand-default, 80%) inset);
+    
   }
 }

@@ -1,0 +1,27 @@
+/*
+  Callout Styles
+*/
+
+.callout {
+  margin: 0 auto;
+  text-align: center;
+  padding: 25px;
+  border-bottom: 1px solid fade(@brand-green-2, 10%);
+
+  h2 {
+    color: @brand-green-1;
+    line-height: .8;
+
+    small {
+      color: lighten(@brand-green-1, 50%);
+    }
+  }
+}
+
+.callout.callout-code {
+  text-align: left;
+
+  .help-block {
+    font-size: 60%;
+  }
+}

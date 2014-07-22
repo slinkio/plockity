@@ -1,3 +1,83 @@
 <div class="hero hero-frontpage">
-
+  <div class="initial-bg"></div>
+  <div class="next-bg"></div>
 </div>
+
+<div class="content-wrapper">
+
+  {{render "dropin-signup"}}
+
+  <div class="row blerbs">
+
+    <div class="col-md-4 blerb">
+      <h1><i class="fa fa-fw fa-lock blerb-icon"></i> Secure</h1>
+      <p>Extremely secure Blowfish ciphering keeps passwords safe and secure against brute force, rainbow table, and other hacking methods.</p>
+    </div>
+
+    <div class="col-md-4 blerb">
+      <h1><i class="fa fa-fw fa-flask blerb-icon"></i> Transparent</h1>
+      <p>We only compare your data, never decrypting to do so. Hashes are transparent, meaning even internal staff can never decrypt your plocked data.</p>
+    </div>
+
+    <div class="col-md-4 blerb">
+      <h1><i class="fa fa-fw fa-cloud blerb-icon"></i> Free*</h1>
+      <p>Enjoy peace of mind, secure data, and fast logins for free; up to <i>5000 requests per month</i>.</p>
+    </div>
+
+  </div>
+  <hr />
+
+  <div class="callout callout-code">
+    <h1><i class="fa fa-fw fa-code"></i> Easy to install and use</h1>
+    <hr />
+    <p>This example is for <strong>Node.js</strong>. See our <a href="#">api docs</a> for interfacing directly with plockity.</p>
+    
+    <h3>Install</h3>
+    <p>With npm installed run the following in your node project.</p>
+    <code>npm install plockity --save</code>
+    <p class="help-block">Adding the <code>--save</code> flag adds plockity to your <code>package.json</code> file.</p>
+
+    <h3>Configure</h3>
+    <p>Make sure you have your app key handy.</p>
+    <pre>
+      <strong>var</strong> <var>plockity</var> = <strong>require</strong>('<var>plockity</var>');<br />
+      plockity.<strong>config</strong>({
+        <var>app</var>: <var>'KaqUL7TKfTyplbzpY7Cw3ugZlu2VoQ6G4kYiR'</var> <span class="text-muted">// Your app key here</span>
+      });
+    </pre>
+
+    <h3>Store</h3>
+    <p>Pass a plain-text key (like an email address), and the data to be encrypted.</p>
+    <pre>
+      plockity.<strong>save</strong>(<var>'user@example.com'</var>, {
+        <var>password</var>: <var>'userpassword',</var>
+        <var>ssn</var>: <var>'000-00-0000'</var>
+      }, <strong>function</strong> (<var>err</var>, <var>result</var>) {
+        if(err) {
+          <span class="text-danger">throw <strong>new Error</strong>(<var>err</var>);
+        }
+        <span class="text-muted">// Do something else</span>
+      });
+    </pre>
+
+    <h3>Compare</h3>
+    <pre>
+      plockity.<strong>compare</strong>(<var>'user@example.com'</var>, {
+        <var>password</var>: <var>'userpass',</var>
+        <var>ssn</var>: <var>'000-00-0000'</var>
+      }, <strong>function</strong> (<var>err</var>, <var>result</var>) {
+        if(<var>err</var>) {
+          <span class="text-danger"><strong>throw</strong> <strong>new Error</strong></span>(<var>err</var>);
+        }
+        console.<strong>log</strong>(<var>result.password</var>); <span class="text-muted">// Logs <strong>false</strong> because <i>userpass</i> isn't <i>userpassword</i></span>
+        console.<strong>log</strong>(<var>result.ssn</var>); <span class="text-muted">// Logs <strong>true</strong> because the ssn matches</span>
+      });
+
+      <span class="text-muted">// Or use a single value</span>
+
+      var same = plockity.<strong>compare</strong>(<var>'user@example.com'</var>, 'password', 'userpass');
+      console.<strong>log</strong>(<var>same</var>); <span class="text-muted">// Logs <strong>false</strong> because <i>userpass</i> isn't <i>userpassword</i></span>
+    </pre>
+
+  </div>
+</div>{{! ./ Content wrapper }}

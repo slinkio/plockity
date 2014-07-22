@@ -2,28 +2,49 @@
   Footer Styles
 */
 
-@footer-padding:           10px;
-@footer-background:        rgba(255, 255, 255, 0.35);
-@footer-background-hover:  rgba(red(@brand-primary), green(@brand-primary), blue(@brand-primary), 0.8);
+@slice-margin: 45px;
 
 footer.app-footer {
   position: relative;
   width: 100%;
-  background-color: @footer-background;
-  padding: @footer-padding;
-  text-align: center;
   z-index: 1;
-
+  overflow: hidden;
+  
   .transition(~'all ease-in-out .4s');
 
-  p {
-    color: white;
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
-    margin: 0;
-  }
+  .slice {
+    z-index: -2;
 
-  &:hover {
-    color: @brand-offwhite !important;
-    background-color: @footer-background-hover;
+    &.slice-first {
+      padding: 55px 10px;
+      background: linear-gradient(156deg, @brand-green-5, @brand-green-1);
+      margin-top: unit(0 - @slice-margin, px);
+      
+      .box-shadow(0 2px 4px fade(@brand-default, 80%));
+      .animation(footerslice 10s infinite);
+      .backface-visibility(hidden);
+      .skew(0, 2deg);
+
+      .content {
+        .skew(0, -2deg);
+      }
+    }
+
+    &.slice-last {
+      background: linear-gradient(156deg, @brand-green-1, @brand-default);
+      margin-top: unit(0 - @slice-margin, px);
+      padding-top: @slice-margin;
+
+      .content {
+        color: white;
+      }
+    }
+
+    p.copyright-text {
+      color: @brand-offwhite;
+      font-weight: 100;
+      margin: 0;
+    }
+
   }
 }

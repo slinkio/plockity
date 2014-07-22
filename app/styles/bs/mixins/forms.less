@@ -80,3 +80,32 @@
     height: auto;
   }
 }
+
+.input-variant(@color) {
+  color: @color;
+  background: none;
+  font-weight: 100;
+  border: none;
+  border-bottom: 3px solid @color;
+  .transition(~"all 0.4s ease-in-out");
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: @color;
+    border-color: lighten(@color, 25%);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: fade(@brand-default, 10%);
+    }
+  }
+}

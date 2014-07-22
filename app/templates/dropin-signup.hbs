@@ -1,0 +1,36 @@
+{{#if formStatus}}
+  {{#bs-alert type=formStatus.type dismissible=true autoDismiss=true autoDismissSeconds="4"}}
+    {{formStatus.msg}}
+  {{/bs-alert}}
+{{/if}}
+
+<form {{bind-attr class=":hide-slide requestingPassword::show"}} {{action "prelimSignup" on="submit"}}>
+  <h2>
+    Get started for free with your first app.<br />
+    <small>Start storing passwords the secure way.</small>
+  </h2>
+  <div class="form-group form-inline">
+    {{input type="email" class="form-control input-warning input-lg" name="dropin-email" value=email placeholder="Email Address" spellcheck="false"}}
+    <button type="submit" class="btn btn-warning btn-lg" {{bind-attr disabled=emailIsNotValid}}>Plockup</button>
+  </div>
+</form>
+
+<form {{bind-attr class=":hide-slide requestingPassword:show"}} {{action "completeSignup" on="submit"}}>
+  <h2>
+    Finish signup<br />
+    <small>{{email}} <a href="#" class="text-warning" {{action "backToEmail"}}><i class="fa fa-fw fa-edit"></i></a></small>
+  </h2>
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="form-group">
+      {{input type="password" class="form-control input-warning input-lg" name="dropin-password" value=password placeholder="Password"}}
+    </div>
+    <div class="form-group">
+      {{input type="password" class="form-control input-warning input-lg" value=passwordre placeholder="Re-enter Password"}}
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-block btn-lg" {{bind-attr disabled=passwordsDoNotMatch}}>Complete Signup</button>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</form>
