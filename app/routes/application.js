@@ -20,6 +20,12 @@ export default Ember.Route.extend({
       }
       // Show the modal
       el.modal('show');
+    },
+    hideModal: function (id) {
+      $("#" + id).modal('hide');
+    },
+    logout: function () {
+      this.get('controller').session.logout();
     }
   }
 });

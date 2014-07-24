@@ -2,7 +2,9 @@
   "predef": {
     "document": true,
     "window": true,
-    "PlockityENV": true
+    "PlockityENV": true,
+    "$": true,
+    "moment": true
   },
   "browser" : true,
   "boss" : true,

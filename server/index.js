@@ -1,16 +1,12 @@
-var bodyParser = require('body-parser'),
-    express    = require('express'),
-    globSync   = require('glob').sync,
-    routes     = globSync('./routes/**/*.js', { cwd: __dirname }).map(require);
+var bodyParser = require('body-parser');
+var globSync   = require('glob').sync;
+var routes     = globSync('./routes/**/*.js', { cwd: __dirname }).map(require);
 
-module.exports = function (app) {
-  app.use( bodyParser.json() );
+module.exports = function(app) {
+  //app.use(bodyParser());
+  //app.use(bodyParser.urlencoded({
+  //  extended: true
+  //}));
 
-  app.use( bodyParser.urlencoded({
-    extended: true
-  }) );
-
-  routes.forEach(function(route) {
-    route(app);
-  });
+  routes.forEach(function(route) { route(app); });
 };

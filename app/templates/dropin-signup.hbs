@@ -1,10 +1,10 @@
 {{#if formStatus}}
-  {{#bs-alert type=formStatus.type dismissible=true autoDismiss=true autoDismissSeconds="4"}}
+  {{#bs-alert type=formStatus.type dismissible=true}}
     {{formStatus.msg}}
   {{/bs-alert}}
 {{/if}}
 
-<form {{bind-attr class=":hide-slide requestingPassword::show"}} {{action "prelimSignup" on="submit"}}>
+<form {{bind-attr class=":hide-slide requestingSecond::show"}} {{action "prelimSignup" on="submit"}}>
   <h2>
     Get started for free with your first app.<br />
     <small>Start storing passwords the secure way.</small>
@@ -15,21 +15,40 @@
   </div>
 </form>
 
-<form {{bind-attr class=":hide-slide requestingPassword:show"}} {{action "completeSignup" on="submit"}}>
+<form {{bind-attr class=":hide-slide requestingSecond:show"}} {{action "completeSignup" on="submit"}}>
   <h2>
     Finish signup<br />
     <small>{{email}} <a href="#" class="text-warning" {{action "backToEmail"}}><i class="fa fa-fw fa-edit"></i></a></small>
   </h2>
   <div class="col-md-2"></div>
   <div class="col-md-8">
-    <div class="form-group">
-      {{input type="password" class="form-control input-warning input-lg" name="dropin-password" value=password placeholder="Password"}}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          {{input type="text" class="form-control input-warning input-lg" name="dropin-name" value=firstName placeholder="First Name*"}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          {{input type="text" class="form-control input-warning input-lg" value=lastName placeholder="Last Name*"}}
+        </div>
+      </div>
     </div>
     <div class="form-group">
-      {{input type="password" class="form-control input-warning input-lg" value=passwordre placeholder="Re-enter Password"}}
+      {{input type="text" class="form-control input-warning" value=companyName placeholder="Company (Optional)"}}
+    </div>
+    <hr />
+    <div class="form-group">
+      {{input type="password" class="form-control input-warning input-lg" name="dropin-password" value=password placeholder="Password*"}}
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success btn-block btn-lg" {{bind-attr disabled=passwordsDoNotMatch}}>Complete Signup</button>
+      {{input type="password" class="form-control input-warning input-lg" value=passwordre placeholder="Re-enter Password*"}}
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-block btn-lg" {{bind-attr disabled=doNotAllowSubmit}}>
+        Complete Signup
+        {{#if loading}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
+      </button>
     </div>
   </div>
   <div class="col-md-2"></div>

@@ -20,7 +20,7 @@ export default Ember.Component.extend({
 
     setTimeout(function () {
       self.set('dismiss', true);
-    }, sec);
+    }, sec * 1000);
   },
 
   prefixType: function () {

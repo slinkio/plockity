@@ -10,6 +10,9 @@ app.import({
   production:  'vendor/ember-data/ember-data.prod.js'
 });
 
+/* Ember Data Adapter */
+app.import('vendor/ember-localstorage-adapter/localstorage_adapter.js');
+
 /* Vendor CSS */
 app.import('vendor/fontawesome/css/font-awesome.css');
 
