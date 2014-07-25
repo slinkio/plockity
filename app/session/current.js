@@ -39,8 +39,7 @@ export default Ember.Object.extend({
     var self = this;
 
     this.set('loggingIn', true);
-    
-    console.debug("posting")
+
     Ember.$.post('/api/login', data).then(function (res) {
       var session = self.store.createRecord('session', {
         token:   res.token,
@@ -48,11 +47,7 @@ export default Ember.Object.extend({
         user:    res.user
       });
 
-      session.save().then(function (session) {
-        console.debug("created session");
-      }).catch(function (res) {
-        console.error(res);
-      });
+      session.save();
 
       self.setProperties({
         content: session,

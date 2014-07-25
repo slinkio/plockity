@@ -6,6 +6,10 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('prototypes');
+  this.resource('account', { path: 'my-account' }, function () {
+    this.route('index', { path: '/' });
+    this.route('apps', { path: 'applications' });
+  });
 });
 
 export default Router;
