@@ -5,5 +5,10 @@
       <small>{{subroute}}</small>
     </h1>
   </div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li>{{#link-to 'account.index' role="tab" data-toggle="tab"}}Overview{{/link-to}}</li>
+    <li>{{#link-to 'account.apps' role="tab" data-toggle="tab"}}Applications{{/link-to}}</li>
+    <li><a href="#">Messages</a></li>
+  </ul>
 </div>
 {{outlet}}
