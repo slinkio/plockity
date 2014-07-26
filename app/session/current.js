@@ -38,7 +38,10 @@ export default Ember.Object.extend({
     console.debug("logging in");
     var self = this;
 
-    this.set('loggingIn', true);
+    this.setProperties({
+      loggingIn: true,
+      loginError: null
+    });
 
     Ember.$.post('/api/login', data).then(function (res) {
       var session = self.store.createRecord('session', {

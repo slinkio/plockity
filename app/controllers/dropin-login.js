@@ -18,8 +18,8 @@ export default Ember.Controller.extend({
 
   authenticationChanged: function () {
     this.setProperties({
-      email:    false,
-      password: false
+      email:    null,
+      password: null
     });
     // Hide the login modal
     this.send("hideModal", "login-modal");
