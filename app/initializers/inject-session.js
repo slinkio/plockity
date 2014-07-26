@@ -12,7 +12,7 @@ export default {
       console.debug("sessions", sessions);
       sessions.forEach(function (session) {
         console.debug("in session");
-        if(session.get('active')) {
+        if( moment( session.get('expires'), "YYY/MM/DD HH:mm:ss" ).isAfter( moment() ) ) {
           console.debug("session is active");
           if(s.length < 1) {
             return s.push(session);
@@ -29,6 +29,7 @@ export default {
       }
       console.debug("injecting");
       container.typeInjection('controller', 'session', 'session:current');
+      container.typeInjection('route', 'session', 'session:current');
       app.advanceReadiness();
     });
   }

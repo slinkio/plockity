@@ -1,0 +1,26 @@
+<div class="hero hero-account">
+  <div class="hero-content">
+    <h1>
+      Login<br />
+      <small>Don't worry, we'll take you back to where you were.</small>
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <form {{action "login" on="submit"}}>
+      <div class="form-group">
+        {{input type="email" class="form-control input-lg" value=email placeholder="Email Address"}}
+      </div>
+      <div class="form-group">
+        {{input type="password" class="form-control input-lg" value=password placeholder="Password"}}
+      </div>
+      {{#if parsedLoginError}}
+        <p class="text-center text-danger">{{{parsedLoginError}}}</p>
+      {{/if}}
+      <button type="submit" class="btn btn-lg btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Log in{{#if session.loggingIn}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>
+    </form>
+  </div>
+  <div class="col-md-2"></div>
+</div>
