@@ -25,6 +25,8 @@ export default Ember.Controller.extend({
     if(transition) {
       this.set('savedTransition', null);
       transition.retry();
+    } else {
+      this.transitionToRoute('index');
     }
   }.observes('session.authenticated'),
 
