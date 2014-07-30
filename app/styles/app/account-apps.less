@@ -1,0 +1,71 @@
+/*
+  Account Apps Styles
+*/
+
+.account-view.ember-view {
+  .app-list-wrapper {
+    margin: 0 auto;
+    width: 50%;
+
+    .apps.list-group {
+      border-top: none;
+
+      .app-item-view.list-group-item {
+
+        .transition(~"all ease-in-out 0.4s");
+
+        &:first-of-type {
+          border-radius: 5px 0;
+        }
+
+        &:nth-child(even) {
+          background-color: fade(lighten(@brand-green-5, 35%), 80%);
+        }
+
+        &:nth-child(odd) {
+          background-color: fade(white, 80%);
+        }
+
+        &.expand {
+          padding-top: 100px;
+          padding-bottom: 100px;
+        }
+
+        .app-item-edit {
+          position: absolute;
+          padding: 10px;
+          color: white;
+          background: @darkpat,
+            linear-gradient(
+              @brand-green-1,
+              transparent
+            ),
+            linear-gradient(
+              90deg,
+              @brand-green-2,
+              transparent
+            ),
+            linear-gradient(
+              -90deg,
+              @brand-green-3,
+              transparent
+            );
+          background-blend-mode: screen;
+
+          .trbl();
+
+          .close-edit {
+            color: white;
+            position: absolute;
+            top: 8px;
+            right: 2px;
+
+            &:hover {
+              color: @brand-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,6 +3,6 @@ import AuthenticatedRouteMixin from '../../mixins/authenticated-route';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function () {
-    return this.session.currentUser.get('apps');
+    return this.session.currentUser.get('app');
   }
 });

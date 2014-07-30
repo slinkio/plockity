@@ -2,11 +2,12 @@
   Pricing Table Styles
 */
 
-@transpat: url('images/plockity_pattern_trans60.png') repeat;
-@darkpat:  url('images/plockity_pattern_dark.png') repeat;
-
 .pricing-table {
   border: 1px dashed fade(@brand-primary, 10%);
+
+  .help-block {
+    margin-top: 20px;
+  }
 
   .plan {
     text-align: center;
@@ -31,6 +32,11 @@
           transparent
         );
       background-blend-mode: screen;
+
+      &.featured {
+        .scale(1.1);
+        .box-shadow(0 2px 3px fade(@brand-default, 80%));
+      }
 
       .plan-header {
         position: relative;

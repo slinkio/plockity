@@ -11,9 +11,7 @@ export default DS.Model.extend({
   email:       attribute('string'),
   
   // Relational
-  apps: DS.hasMany('app', {
-    embedded: 'always'
-  }),
+  app: DS.hasMany('app', { async:true }),
 
   // Computed
   fullName: function () {

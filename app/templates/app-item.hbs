@@ -1,0 +1,30 @@
+<h4>
+  {{content.name}}&nbsp;
+  <div class="pull-right app-item-controls">
+    <a href="#" {{action "toggleProperty" "showingDetails"}}>
+      <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
+    </a>
+    <a href="#" {{action "toggleProperty" "isEditing"}}>
+      <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
+    </a>
+  </div>
+</h4>
+
+<div {{bind-attr class=":app-item-details :hide-slide showingDetails:show"}}>
+  <hr />
+  <div class="row">
+    {{#with content}}
+      <div class="col-md-6">
+        <h5>Allowed Domain: {{domain}}</h5>
+      </div>
+      <div class="col-md-6">
+        <h5>Created: {{time-ago time_stamp}}</h5>
+      </div>
+    {{/with}}
+  </div>
+</div>
+
+<div {{bind-attr class=":app-item-edit :hide-slide isEditing:show"}}>
+  <a href="#" class="close-edit" {{action "toggleProperty" "isEditing"}}><i class="fa fa-fw fa-2x fa-times-circle"></i></a>
+  <h2>Editing {{content.name}}...</h2>
+</div>

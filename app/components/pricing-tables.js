@@ -3,23 +3,24 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: [ 'pricing-table', 'row' ],
   // Fixture data below, load prices from server
-  prices: {
-    levelone: 0,
-    leveltwo: 15,
-    levelthree: 49
+  init: function () {
+    this._super();
+
+    this.set('plans', this.get('targetObject.store').find('plan'));
   },
 
   selected: function () {
-    var s = this.get('plan'),
-        prices = this.get('prices'),
-        count = 1,
-        returnObj = {};
+    var s = this.get('selectedPlan'),
+        plans = this.get('plans'),
+        self = this;
 
-    for (var k in prices) {
-      returnObj[k] = (count.toString() === s);
-      count++;
-    }
-
-    return returnObj;
-  }.property('plan')
+    plans.forEach(function (plan) {
+      var eq = (plan.get('title') === s);
+      plan.set('selected', eq);
+      
+      if(eq) {
+        self.set('plan', plan);
+      }
+    });
+  }.observes('selectedPlan')
 });

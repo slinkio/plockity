@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('apps', { path: 'applications' });
   });
   this.route('login');
+  this.route('contact');
 });
 
 export default Router;

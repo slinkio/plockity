@@ -20,9 +20,10 @@ export default DS.RESTSerializer.extend({
       return hash;
     }
   },
-  serialize: function(user) { // Options param available
+  serialize: function (user) { // Options param available
     console.debug("record", user);
     var json = {
+      _id:        user.get('id'),
       name: {
         first:    user.get('firstName'),
         last:     user.get('lastName'),
@@ -32,7 +33,7 @@ export default DS.RESTSerializer.extend({
         email:    user.get('email'),
         password: user.get('password')
       },
-      apps:       user.get('apps').mapProperty('_id'),
+      app:        user.get('app').mapProperty('id'),
       time_stamp: user.get('time_stamp')
     };
     console.debug("payload", json);

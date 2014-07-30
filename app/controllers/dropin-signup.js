@@ -115,13 +115,13 @@ export default Ember.Controller.extend(AutoNullMixin, {
             type: "success",
             msg: "Thanks for signing up, " + user.get('firstName') + "."
           },
-          loading: false,
-          firstName: null,
-          lastName: null,
-          companyName: null,
-          email: null,
-          password: null,
-          passwordre: null,
+          loading:          false,
+          firstName:        null,
+          lastName:         null,
+          companyName:      null,
+          email:            null,
+          password:         null,
+          passwordre:       null,
           requestingSecond: false
         });
       }).catch(function (res) {

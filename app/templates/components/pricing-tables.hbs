@@ -1,72 +1,26 @@
-<div class="col-md-4 plan">
-  <div class="content">
-    <div class="plan-header">
-      <h2>
-        Developer<br />
-        <small>Great for testing</small>
-      </h2>
-      <span class="price">{{#if prices.levelone}}${{prices.levelone}}/month{{else}}FREE{{/if}}</span>
+{{#each plan in plans}}
+  <div class="col-md-4 plan">
+    <div {{bind-attr class=":content plan.featured:featured"}}>
+      <div class="plan-header">
+        <h2>
+          {{plan.title}}<br />
+          <small>{{plan.tagline}}</small>
+        </h2>
+        <span class="price">{{#if plan.price}}${{plan.price}}/month{{else}}FREE{{/if}}</span>
+      </div>
+      <div class="plan-features">
+        <ul>
+        {{#each plan.features}}
+          <li>{{this}}</li>
+        {{/each}}
+        </ul>
+      </div>
+        
+      {{#if plan.selected}}
+        <div class="btn selected-badge">Selected</div>
+      {{else}}
+        <label class="btn choose-plan">{{view "radio-button" name="planSelection" selectionBinding="selectedPlan" value=plan.title}}Select Plan</label>
+      {{/if}}
     </div>
-    <div class="plan-features">
-      <ul>
-        <li>5,000 Requests</li>
-        <li>API/Plugin Access</li>
-      </ul>
-    </div>
-      
-    {{#if selected.levelone}}
-      <div class="btn selected-badge">Selected</div>
-    {{else}}
-      <label class="btn choose-plan">{{view "radio-button" name="planSelection" selectionBinding="plan" value="1"}}Select Plan</label>
-    {{/if}}
   </div>
-</div>
-<div class="col-md-4 plan">
-  <div class="content">
-    <div class="plan-header">
-      <h2>
-        Startup<br />
-        <small>Most Popular</small>
-      </h2>
-      <span class="price">{{#if prices.leveltwo}}${{prices.leveltwo}}/month{{else}}FREE{{/if}}</span>
-    </div>
-
-    <div class="plan-features">
-      <ul>
-        <li>15,000 Requests</li>
-        <li>API/Plugin Access</li>
-        <li>Premium Support (Chat, Email)</li>
-      </ul>
-    </div>
-
-    {{#if selected.leveltwo}}
-      <div class="btn selected-badge">Selected</div>
-    {{else}}
-      <label class="btn choose-plan">{{view "radio-button" name="planSelection" selectionBinding="plan" value="2"}}Select Plan</label>
-    {{/if}}
-  </div>
-</div>
-<div class="col-md-4 plan">
-  <div class="content">
-    <div class="plan-header">
-      <h2>
-        Enterprise<br />
-        <small>Secure your business</small>
-      </h2>
-      <span class="price">{{#if prices.levelthree}}${{prices.levelthree}}/month{{else}}FREE{{/if}}</span>
-    </div>
-    <div class="plan-features">
-      <ul>
-        <li>30,000 Requests</li>
-        <li>API/Plugin Access</li>
-        <li>Business Support (Chat, Email, Phone)</li>
-      </ul>
-    </div>
-
-    {{#if selected.levelthree}}
-      <div class="btn selected-badge">Selected</div>
-    {{else}}
-      <label class="btn choose-plan">{{view "radio-button" name="planSelection" selectionBinding="plan" value="3"}}Select Plan</label>
-    {{/if}}
-  </div>
-</div>
+{{/each}}
