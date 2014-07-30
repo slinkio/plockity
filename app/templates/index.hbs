@@ -5,11 +5,9 @@
 
 <div class="content-wrapper">
 
-  {{#if session.authenticated}}
-    <h1>HAI! {{session.currentUser.firstName}}</h1>
-  {{else}}
+  {{#unless session.authenticated}}
     {{render "dropin-signup"}}
-  {{/if}}
+  {{/unless}}
 
   <div class="row blerbs">
 

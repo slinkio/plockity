@@ -1,1 +1,39 @@
-<h2>Applications</h2>
+<ul class="nav nav-tabs app-tabs" role="tablist">
+  <li><a href="#" role="tab" data-toggle="tab" {{action "showModal" 'add-app-modal' false 'body'}}><i class="fa fa-fw fa-plus"></i> Add Application...</a></li>
+</ul>
+<div class="apps list-group">
+  {{#each app in content}}
+
+  {{else}}
+    <div class="list-group-item">
+      <h2 class="text-center">No apps. Click "Add Application" to add an app. <i class="fa fa-fw fa-rotate-90 fa-mail-reply pull-right"></i></h2>
+    </div>
+  {{/each}}
+</div>
+
+{{#bs-modal id="add-app-modal" dismissible=true title='<h2><i class="fa fa-fw fa-tasks"></i> Add a new Plockity Application</h2>'}}
+  <form {{action "login" on="submit"}}>
+    <div class="modal-body">  
+      <div class="form-group">
+        <label>Give your app a name...</label>
+        {{input type="text" class="form-control input-lg input-success" value=appName placeholder="Application Name*"}}
+      </div>
+      <div {{bind-attr class=":form-group :hide-slide appName:show"}}>
+        <label>What domain is your app at? <i>(Exclude http, https protocols and subdomains)</i></label>
+        {{input type="text" class="form-control input-lg input-success" value=appDomain placeholder="Domain* (ex. mysite.com)"}}
+      </div>
+      <div {{bind-attr class=":pricing :hide-slide appName:show"}}>
+        <h3>Which plan would you like?</h3>
+      </div>
+      <div {{bind-attr class=":app-preview :hide-slide appName:show"}}>
+        <h2>New application: {{appName}}</h2>
+      </div>
+    </div>
+    <div class="modal-footer">
+      {{#if parsedAppError}}
+        <p class="text-center text-danger">{{{parsedAppError}}}</p>
+      {{/if}}
+      <button type="submit" class="btn btn-lg btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Create App{{#if loading}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>
+    </div>
+  </form>
+{{/bs-modal}}
