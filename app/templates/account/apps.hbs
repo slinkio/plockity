@@ -11,7 +11,7 @@
   {{/each}}
 </div>
 
-{{#bs-modal id="add-app-modal" dismissible=true title='<h2><i class="fa fa-fw fa-tasks"></i> Add a new Plockity Application</h2>'}}
+{{#bs-modal id="add-app-modal" modal-lg=true dismissible=true title='<h2><i class="fa fa-fw fa-tasks"></i> Add a new Plockity Application</h2>'}}
   <form {{action "login" on="submit"}}>
     <div class="modal-body">  
       <div class="form-group">
@@ -19,11 +19,12 @@
         {{input type="text" class="form-control input-lg input-success" value=appName placeholder="Application Name*"}}
       </div>
       <div {{bind-attr class=":form-group :hide-slide appName:show"}}>
-        <label>What domain is your app at? <i>(Exclude http, https protocols and subdomains)</i></label>
-        {{input type="text" class="form-control input-lg input-success" value=appDomain placeholder="Domain* (ex. mysite.com)"}}
+        <label>What domain is your app at?<br /><i class="text-muted"><i class="fa fa-info-circle fa-fw"></i> Please exlude subdomains and ports</i></label>
+        {{input type="url" class="form-control input-lg input-success" value=appDomain placeholder="Domain* (ex. mysite.com)"}}
       </div>
-      <div {{bind-attr class=":pricing :hide-slide appName:show"}}>
-        <h3>Which plan would you like?</h3>
+      <div {{bind-attr class=":pricing :hide-slide showPlans:show"}}>
+        <label>Which plan would you like?</label>
+        {{pricing-tables plan=plan}}
       </div>
       <div {{bind-attr class=":app-preview :hide-slide appName:show"}}>
         <h2>New application: {{appName}}</h2>

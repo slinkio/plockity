@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
     {
       _valName: 'appDomain',
       format: function (v) {
-        return (v) ? v.replace(/(\w+:\/\/|www\.|:\w+|^([-\w]+.)+)/g, '').toLowerCase().trim() : null;
+        return (v) ? v.toLowerCase() : v;
       }
     }
   ],
@@ -27,5 +27,9 @@ export default Ember.Controller.extend({
         return self.set(entry._valName, entry.format(self.get(entry._valName)));
       }
     });
-  }
+  },
+
+  showPlans: function () {
+    return (this.get('appName') && this.get('appDomain'));
+  }.property('appName', 'appDomain')
 });

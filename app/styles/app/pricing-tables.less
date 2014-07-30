@@ -1,0 +1,146 @@
+/*
+  Pricing Table Styles
+*/
+
+@transpat: url('images/plockity_pattern_trans60.png') repeat;
+@darkpat:  url('images/plockity_pattern_dark.png') repeat;
+
+.pricing-table {
+  border: 1px dashed fade(@brand-primary, 10%);
+
+  .plan {
+    text-align: center;
+    padding: 0;
+
+    .content {
+      overflow: hidden;
+      margin: 10px;
+      background: @transpat,
+        linear-gradient(
+          @brand-green-1,
+          transparent
+        ),
+        linear-gradient(
+          90deg,
+          @brand-green-3,
+          transparent
+        ),
+        linear-gradient(
+          -90deg,
+          @brand-green-5,
+          transparent
+        );
+      background-blend-mode: screen;
+
+      .plan-header {
+        position: relative;
+        margin-top: -34px;
+        text-align: center;
+        padding: 10px 0 1px 0;
+        color: white;
+        text-shadow: 1px 1px 0 @brand-default;
+
+        .skew(0, -2deg);
+        .box-shadow(0 1px 1px fade(@brand-default, 80%));
+        .backface-visibility(hidden);
+
+        background: @darkpat,
+          linear-gradient(
+            @brand-green-1,
+            transparent
+          ),
+          linear-gradient(
+            90deg,
+            @brand-green-2,
+            transparent
+          ),
+          linear-gradient(
+            -90deg,
+            @brand-green-3,
+            transparent
+          );
+        background-blend-mode: screen;
+
+        h2 {
+          z-index: 2;
+          position: relative;
+          padding: 10px 0 40px 0;
+          line-height: 0.8;
+          margin: 20px 0;
+
+          .skew(0, 2deg);
+
+          small {
+            background-color: fade(@brand-default, 20%);
+            border-radius: 10px;
+            padding: 2px 5px;
+            font-size: 40%;
+            color: white;
+          }
+        }
+
+        .price {
+          z-index: 1;
+          position: absolute;
+          bottom: 4%;
+          right: 0;
+          background-color: fade(@brand-warning, 80%);
+          padding: 5px 15px;
+
+          .skew(0, 2deg);
+          .backface-visibility(hidden);
+          .box-shadow(0 1px 1px fade(@brand-default, 80%));
+        }
+      }
+
+      .plan-features {
+        padding: 10px;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          li {
+            padding: 2px;
+            font-size: 80%;
+            font-weight: 200;
+
+            &:before {
+              content: "\f00c";
+              margin-right: 5px;
+              color: @brand-success;
+              text-shadow: 1px 1px 1px fade(@brand-green-1, 80%);
+              .fa();
+            }
+          }
+        }
+      }
+
+      .btn.show {
+        display: inline-block !important;
+      }
+
+      label.choose-plan {
+        color: @brand-offwhite;
+        background-color: fade(@brand-primary, 80%);
+
+        &:hover {
+          color: @brand-default;
+          background-color: fade(@brand-warning, 60%);
+        }
+
+        input {
+          display: none;
+          visibility: hidden;
+        }
+      }
+
+      .selected-badge {
+        color: @brand-offwhite;
+        background-color: fade(@brand-success, 80%);
+      }
+    }
+
+  }
+}

@@ -21,7 +21,7 @@ export default {
         // Delete duplicate, old sessions
         session.destroyRecord();
       });
-      console.debug("done iterating")
+      console.debug("done iterating");
       if(s[0]) {
         console.debug("have session");
         sescon.set('content', s[0]);
