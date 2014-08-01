@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+- '0.10'
+
+before_install:
+- npm install npm -g
+
+before_script:
+- bower install
+- cd vendor/braintree-encryption.js; rake build:minify;
+
+after_success:
+- ember build env --environment=production
+- cd dist; find . -type f -exec curl -u $FUSR:$FPSW --ftp-create-dirs -T {} ftp://trust.associatedemployers.org/{} \;

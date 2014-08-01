@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
         });
       }
 
-      app.save().then(function (app) {
+      app.save().then(function () {
           self.setProperties({
             loading:   false,
             isEditing: false

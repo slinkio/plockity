@@ -2,6 +2,9 @@
   Account Apps Styles
 */
 
+@expand-height-edit: 680px;
+@expand-height-confirm: 160px;
+
 .account-view.ember-view {
   .app-list-wrapper {
     margin: 0 auto;
@@ -27,21 +30,31 @@
         }
 
         &.expand {
-          min-height: 800px;
-          padding-top: 200px;
-          padding-bottom: 200px;
+          min-height: @expand-height-edit;
         }
 
         &.expand-sm {
-          min-height: 140px;
-          padding-bottom: 70px;
-          padding-top: 70px;
+          min-height: @expand-height-confirm;
+        }
+
+        .app-item-edit, .app-item-confirm {
+          position: absolute;
+          background-blend-mode: screen;
+
+          .trbl();
+          
+          h3 {
+            background-color: fade(white, 20%);
+            padding: 4px;
+            margin: 30px -10px 0 -10px;
+            text-shadow: 1px 1px 1px fade(@brand-default, 80%);
+          }
         }
 
         .app-item-edit {
-          position: absolute;
           padding: 10px;
           color: white;
+
           background: @darkpat,
             linear-gradient(
               @brand-green-1,
@@ -57,9 +70,10 @@
               @brand-green-3,
               transparent
             );
-          background-blend-mode: screen;
 
-          .trbl();
+          &.show {
+            max-height: @expand-height-edit;
+          }
 
           .close-edit {
             color: white;
@@ -72,11 +86,21 @@
             }
           }
 
-          h3 {
-            background-color: fade(white, 20%);
-            padding: 4px;
-            margin: 30px -10px 0 -10px;
-            text-shadow: 1px 1px 1px fade(@brand-default, 80%);
+          label {
+            color: white;
+            font-weight: 100;
+          }
+
+          .text-muted, .help-block {
+            color: darken(white, 10%);
+          }
+
+          a {
+            color: lighten(@brand-primary, 50%);
+
+            &:hover {
+              color: lighten(@brand-primary, 60%);
+            }
           }
 
           .pricing .pricing-table {
@@ -101,10 +125,10 @@
           }
         }
         .app-item-confirm {
-          position: absolute;
           padding: 10px;
           color: white;
           text-align: center;
+
           background: @darkpat,
             linear-gradient(
               darken(@brand-danger, 10%),
@@ -120,15 +144,9 @@
               @brand-warning,
               transparent
             );
-          background-blend-mode: screen;
 
-          .trbl();
-
-          h3 {
-            background-color: fade(white, 20%);
-            padding: 4px;
-            margin: 30px -10px 0 -10px;
-            text-shadow: 1px 1px 1px fade(@brand-default, 80%);
+          &.show {
+            max-height: @expand-height-confirm;
           }
 
           .pad-controls {

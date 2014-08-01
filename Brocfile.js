@@ -19,5 +19,6 @@ app.import('vendor/fontawesome/css/font-awesome.css');
 /* Vendor JS */
 app.import('vendor/bootstrap/dist/js/bootstrap.min.js');
 app.import('vendor/moment/moment.js');
+app.import('vendor/braintree-encryption.js/target/braintree-1.3.10.js');
 
 module.exports = app.toTree();

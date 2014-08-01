@@ -31,6 +31,7 @@ export default {
       console.debug("injecting");
       container.typeInjection('controller', 'session', 'session:current');
       container.typeInjection('route', 'session', 'session:current');
+      container.typeInjection('component', 'session', 'session:current');
       app.advanceReadiness();
     });
   }
