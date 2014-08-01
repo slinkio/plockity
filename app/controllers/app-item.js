@@ -68,6 +68,9 @@ export default Ember.Controller.extend({
         app.rollback();
       }
       this.toggleProperty('isEditing');
+    },
+    deleteApp: function () {
+      this.get('content').destroyRecord();
     }
   }
 });
