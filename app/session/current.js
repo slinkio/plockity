@@ -1,10 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Object.extend({
+
   contentDidChange: function () {
     console.debug("Session did change");
+    
     if(this.get('content.token')) {
       console.debug("setting up header");
+
       this._setupHeaders(this.get('content.token'));
       this._populateUser();
       this.set('authenticated', true);
@@ -15,7 +18,9 @@ export default Ember.Object.extend({
 
   logout: function () {
     var self = this;
+
     console.debug("logging out");
+    
     // Find the session
     this.store.find('session', this.get('content.id')).then(function (session) {
       // Delete the session
@@ -27,6 +32,7 @@ export default Ember.Object.extend({
         currentUser: null
       });
     });
+
     Ember.$.ajaxSetup({
       headers: {
         'Session': null
@@ -36,12 +42,15 @@ export default Ember.Object.extend({
   
   login: function (data) {
     console.debug("logging in");
+
     var self = this;
 
     this.setProperties({
       loggingIn: true,
       loginError: null
     });
+
+    Ember.assert('Session#login must have data object to pass to api#login', typeof data === 'object');
 
     Ember.$.post('/api/login', data).then(function (res) {
       var session = self.store.createRecord('session', {
@@ -67,6 +76,8 @@ export default Ember.Object.extend({
   },
   
   _setupHeaders: function (token) {
+    Ember.assert('Session must have token to setup headers', token);
+
     Ember.$.ajaxSetup({
       headers: {
         'Session': token
@@ -75,6 +86,21 @@ export default Ember.Object.extend({
   },
 
   _populateUser: function () {
+    Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
+
     this.set('currentUser', this.store.find('user', this.get('content.user')));
+  },
+
+  generateBraintreeToken: function (context, callback) {
+    Ember.assert('Session must have currentUser to generate Braintree token', this.get('currentUser.id'));
+
+    Ember.$.get('/api/transaction/token', { user: this.get('currentUser.id') }).then(function (res) {
+      var err   = res.error || null,
+          token = res.token || null;
+
+      callback.apply(context, err, token);
+    }, function (res) {
+      callback.apply(context, res);
+    });
   }
 });
