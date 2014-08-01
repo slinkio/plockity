@@ -7,6 +7,9 @@
     <a href="#" {{action "toggleProperty" "isEditing"}}>
       <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
     </a>
+    <a href="#" {{action "toggleProperty" "confirmDelete"}}>
+      <i {{bind-attr class=":text-danger :fa :fa-fw :fa-trash-o confirmDelete:active"}}></i>
+    </a>
   </div>
 </h4>
 
@@ -21,6 +24,14 @@
         <h5>Created: {{time-ago time_stamp}}</h5>
       </div>
     {{/with}}
+  </div>
+</div>
+
+<div {{bind-attr class=":app-item-confirm :hide-slide confirmDelete:show"}}>
+  <h3>Are you sure you want to delete {{content.name}}?</h3>
+  <div class="pad-controls">
+    <button class="btn btn-danger" {{action "deleteApp"}}><i class="fa fa-fw fa-fire"></i> Delete</button>
+    <button class="btn btn-success close-btn" {{action "toggleProperty" "confirmDelete"}}>No! Get me out of here!</button>
   </div>
 </div>
 
