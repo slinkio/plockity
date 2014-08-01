@@ -1,8 +1,8 @@
 import { test, moduleFor } from 'ember-qunit';
 
-moduleFor('controller:account/apps', 'AccountAppsController', {
+moduleFor('controller:plan', 'PlanController', {
   // Specify the other units that are required for this test.
-  needs: [ 'controller:application' ]
+  // needs: ['controller:foo']
 });
 
 // Replace this with your real tests.

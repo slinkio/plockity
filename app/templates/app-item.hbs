@@ -25,6 +25,29 @@
 </div>
 
 <div {{bind-attr class=":app-item-edit :hide-slide isEditing:show"}}>
-  <a href="#" class="close-edit" {{action "toggleProperty" "isEditing"}}><i class="fa fa-fw fa-2x fa-times-circle"></i></a>
-  <h2>Editing {{content.name}}...</h2>
+  <a href="#" class="close-edit" {{action "cancelEdits"}}><i class="fa fa-fw fa-2x fa-times-circle"></i></a>
+  <h3>Editing {{content.name}}...</h3>
+  <form class="app-item-edit-form" {{action "saveEdits" on="submit"}}>
+    <div class="form-group">
+      <label>App name</label>
+      {{input type="text" class="form-control input-sm" value=content.name placeholder="Application Name*"}}
+    </div>
+    <div class="form-group">
+      <label>App domain<br /><i class="text-muted"><i class="fa fa-info-circle fa-fw"></i> Please exlude subdomains and ports</i></label>
+      {{input type="url" class="form-control input-sm" value=content.domain placeholder="Domain* (ex. mysite.com)"}}
+    </div>
+    <div class="pricing">
+      <label>App plan</label>
+      {{pricing-tables plan=content.plan}}
+      <span class="help-block text-center">Please {{#link-to 'contact'}}contact us{{/link-to}} for higher volume packages.</span>
+    </div>
+    {{#if formStatus}}
+      {{#bs-alert type=formStatus.type}}
+        <p class="text-center">{{formStatus.msg}}</p>
+      {{/bs-alert}}
+    {{/if}}
+    <div {{bind-attr class=":form-group :hide-slide content.isDirty:show"}}>
+      <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Save</button>
+    </div>
+  </form>
 </div>

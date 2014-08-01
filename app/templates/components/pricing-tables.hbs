@@ -1,25 +1,25 @@
-{{#each plan in plans}}
+{{#each plans itemController="plan"}}
   <div class="col-md-4 plan">
-    <div {{bind-attr class=":content plan.featured:featured"}}>
+    <div {{bind-attr class=":content content.featured:featured"}}>
       <div class="plan-header">
         <h2>
-          {{plan.title}}<br />
-          <small>{{plan.tagline}}</small>
+          {{content.title}}<br />
+          <small>{{content.tagline}}</small>
         </h2>
-        <span class="price">{{#if plan.price}}${{plan.price}}/month{{else}}FREE{{/if}}</span>
+        <span class="price">{{#if content.price}}${{content.price}}/month{{else}}FREE{{/if}}</span>
       </div>
       <div class="plan-features">
         <ul>
-        {{#each plan.features}}
+        {{#each content.features}}
           <li>{{this}}</li>
         {{/each}}
         </ul>
       </div>
         
-      {{#if plan.selected}}
+      {{#if selected}}
         <div class="btn selected-badge">Selected</div>
       {{else}}
-        <label class="btn choose-plan">{{view "radio-button" name="planSelection" selectionBinding="selectedPlan" value=plan.title}}Select Plan</label>
+        <label class="btn choose-plan">{{view "radio-button" name=radioID selectionBinding="selectedPlan" value=content.title}}Select Plan</label>
       {{/if}}
     </div>
   </div>

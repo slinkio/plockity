@@ -8,7 +8,7 @@ export default DS.Model.extend({
 
   // Relational
   plan:    DS.belongsTo('plan'),
-  creator: DS.belongsTo('user'),
+  creator: DS.belongsTo('user', { async: true }),
 
   // System
   time_stamp: attribute('string', {

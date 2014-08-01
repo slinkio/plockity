@@ -27,8 +27,9 @@
         }
 
         &.expand {
-          padding-top: 100px;
-          padding-bottom: 100px;
+          min-height: 800px;
+          padding-top: 200px;
+          padding-bottom: 200px;
         }
 
         .app-item-edit {
@@ -62,6 +63,34 @@
 
             &:hover {
               color: @brand-primary;
+            }
+          }
+
+          h3 {
+            background-color: fade(white, 20%);
+            padding: 4px;
+            margin: 30px -10px 0 -10px;
+            text-shadow: 1px 1px 1px fade(@brand-default, 80%);
+          }
+
+          .pricing .pricing-table {
+            .plan-header {
+              background:
+                linear-gradient(
+                  @brand-primary,
+                  transparent
+                ),
+                linear-gradient(
+                  90deg,
+                  darken(@brand-primary, 10%),
+                  transparent
+                ),
+                linear-gradient(
+                  -90deg,
+                  lighten(@brand-primary, 15%),
+                  transparent
+                );
+              background-blend-mode: screen;
             }
           }
         }

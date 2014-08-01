@@ -8,6 +8,7 @@ export default {
     var store    = container.lookup('store:main'),
         sescon   = container.lookup('session:current'),
         s        = [];
+
     store.find('session').then(function (sessions) {
       console.debug("sessions", sessions);
       sessions.forEach(function (session) {
