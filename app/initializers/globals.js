@@ -16,6 +16,7 @@ export default {
     
     globcon.set('plans', plans);
 
+    container.typeInjection('route', 'globals', 'globals:app');
     container.typeInjection('component', 'globals', 'globals:app');
 
     app.advanceReadiness();
