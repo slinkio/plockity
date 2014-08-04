@@ -21,6 +21,6 @@ app.import('vendor/nprogress/nprogress.css');
 app.import('vendor/bootstrap/dist/js/bootstrap.min.js');
 app.import('vendor/moment/moment.js');
 app.import('vendor/nprogress/nprogress.js');
-app.import('vendor/braintree-encryption.js/target/braintree-1.3.10.js');
+app.import('vendor/braintree/index.js');
 
 module.exports = app.toTree();

@@ -18,6 +18,6 @@
     "moment": "~2.7.0",
     "ember-localstorage-adapter": "~0.3.2",
     "ember-data": "canary",
-    "braintree-encryption.js": "braintree/braintree-encryption.js#~1.3.10"
+    "braintree": "https://js.braintreegateway.com/v2/braintree.js"
   }
 }

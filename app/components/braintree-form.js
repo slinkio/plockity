@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       var $container = this.$().find('.braintree-container');
       console.debug("Setting up container for braintree");
       console.debug("Have container jQuery object?", $container.length > 0);
-      Braintree.setup(token, $container, {
+      braintree.setup(token, 'dropin', {
         container: $container
       });
     }

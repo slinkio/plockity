@@ -8,7 +8,6 @@ before_install:
 
 before_script:
 - bower install
-- cd vendor/braintree-encryption.js; rake build:minify;
 
 after_success:
 - ember build env --environment=production
