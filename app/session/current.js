@@ -8,7 +8,9 @@ export default Ember.Object.extend({
     if(this.get('content.token')) {
       console.debug("setting up header");
 
-      this._setupHeaders(this.get('content.token'));
+      var headers = this.get('content').getProperties('token', 'user');
+
+      this._setupHeaders(headers.token, headers.user);
       this._populateUser();
       this.set('authenticated', true);
     } else {
@@ -75,12 +77,13 @@ export default Ember.Object.extend({
     });
   },
   
-  _setupHeaders: function (token) {
-    Ember.assert('Session must have token to setup headers', token);
+  _setupHeaders: function (token, user) {
+    Ember.assert('Session must have token & user [id] to setup headers', ( token && user ));
 
     Ember.$.ajaxSetup({
       headers: {
-        'Session': token
+        'Session': token,
+        'User':    user
       }
     });
   },
