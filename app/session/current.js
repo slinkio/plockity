@@ -91,7 +91,15 @@ export default Ember.Object.extend({
   _populateUser: function () {
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
 
-    this.set('currentUser', this.store.find('user', this.get('content.user')));
+    var self = this;
+
+    this.store.find('user', this.get('content.user')).then(function (user) {
+      self.set('currentUser', user);
+    }, function (res) { // Errored
+      /*self.setProperties({
+        authenticated: false
+      });*/
+    });
   },
 
   generateBraintreeToken: function (context, callback) {

@@ -3,6 +3,20 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   // Define Global Action Handlers
   actions: {
+    error: function (err, transition) {
+      console.error(err);
+
+      if( err.status === 401 ) {
+        this.session.logout();
+
+        this.controllerFor('login').setProperties({
+          savedTransition: transition,
+          loginError: 'Please log in to continue...'
+        });
+
+        this.transitionTo('login');
+      }
+    },
     showModal: function (id, staticModal, forceAppend) {
       // Assign the modal element to a variable
       var el = $("#" + id);

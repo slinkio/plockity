@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
     if(!e) {
       return null;
     }
-    return (e.status === 404) ? "No user found with that email. Please try again." : (e.status === 401) ? "Wrong password for that user. Please try again." : "Problem communicating with server, please try again. <br /><span class='text-muted'>" + e.responseText + "</span>";
+    return (typeof e === 'string') ? e : (e.status === 404) ? "No user found with that email. Please try again." : (e.status === 401) ? "Wrong password for that user. Please try again." : "Problem communicating with server, please try again. <br /><span class='text-muted'>" + e.responseText + "</span>";
   }.property('session.loginError'),
 
   authenticationChanged: function () {

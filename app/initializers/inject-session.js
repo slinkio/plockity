@@ -5,27 +5,28 @@ export default {
   initialize: function(container, app) {
     app.deferReadiness();
     console.debug("Injecting session:current");
-    var store    = container.lookup('store:main'),
-        sescon   = container.lookup('session:current'),
-        s        = [];
+    var store  = container.lookup('store:main'),
+        sescon = container.lookup('session:current'),
+        s;
 
     store.find('session').then(function (sessions) {
       console.debug("sessions", sessions);
       sessions.forEach(function (session) {
         console.debug("in session");
-        if( moment( session.get('expires'), "YYY/MM/DD HH:mm:ss" ).isAfter( moment() ) ) {
+        console.log("Session expiration", session.get('expires'));
+        if( moment( session.get('expires'), "YYYY/MM/DD HH:mm:ss" ).isAfter( moment() ) ) {
           console.debug("session is active");
-          if(s.length < 1) {
-            return s.push(session);
-          }
+          s = session;
+        } else {
+          // Delete duplicate, old sessions
+          session.destroyRecord();
         }
-        // Delete duplicate, old sessions
-        session.destroyRecord();
+        
       });
       console.debug("done iterating");
-      if(s[0]) {
+      if(s) {
         console.debug("have session");
-        sescon.set('content', s[0]);
+        sescon.set('content', s);
         console.debug("set");
       }
       console.debug("injecting");
