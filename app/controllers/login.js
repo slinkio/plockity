@@ -17,6 +17,9 @@ export default Ember.Controller.extend({
   }.property('session.loginError'),
 
   authenticationChanged: function () {
+    if(!this.session.get('authenticated') || !this.session.get('didSetHeaders')) {
+      return;
+    }
     this.setProperties({
       email:    null,
       password: null

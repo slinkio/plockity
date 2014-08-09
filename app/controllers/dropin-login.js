@@ -17,13 +17,16 @@ export default Ember.Controller.extend({
   }.property('session.loginError'),
 
   authenticationChanged: function () {
+    if(!this.session.get('authenticated') || !this.session.get('didSetHeaders')) {
+      return;
+    }
     this.setProperties({
       email:    null,
       password: null
     });
     // Hide the login modal
     this.send("hideModal", "login-modal");
-  }.observes('session.authenticated'),
+  }.observes('session.authenticated', 'session.didSetHeaders'),
 
   actions: {
     login: function () {

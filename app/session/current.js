@@ -4,14 +4,14 @@ export default Ember.Object.extend({
 
   contentDidChange: function () {
     console.debug("Session did change");
-    
+    this.set('didSetHeaders', false);
+
     if(this.get('content.token')) {
       console.debug("setting up header");
 
       var headers = this.get('content').getProperties('token', 'user');
 
       this._setupHeaders(headers.token, headers.user);
-      this._populateUser();
       this.set('authenticated', true);
     } else {
       this.set('authenticated', false);
@@ -86,21 +86,20 @@ export default Ember.Object.extend({
         'User':    user
       }
     });
+
+    this.set('didSetHeaders', true);
   },
 
-  _populateUser: function () {
+  currentUser: function () {
+    if(!this.get('content.user') || !this.get('authenticated')) {
+      return;
+    }
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
 
     var self = this;
 
-    this.store.find('user', this.get('content.user')).then(function (user) {
-      self.set('currentUser', user);
-    }, function (res) { // Errored
-      /*self.setProperties({
-        authenticated: false
-      });*/
-    });
-  },
+    return this.store.find('user', this.get('content.user'));
+  }.property('content.user', 'authenticated'),
 
   generateBraintreeToken: function (context, callback) {
     Ember.assert('Session must have currentUser to generate Braintree token', this.get('currentUser.id'));

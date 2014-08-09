@@ -12,8 +12,11 @@ export default Ember.Mixin.create({
       console.debug("set props, transitioning");
       return this.transitionTo('login');
     }
-    console.debug("this super");
+
     this._super();
+
+    // return a promise if currentUser is not populated.
+    return this.session.get('currentUser');
   },
   authenticationChanged: function () {
     if(!this.session.get('authenticated')) {

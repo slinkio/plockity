@@ -1,14 +1,43 @@
 <div class="hero hero-account">
   <div class="hero-content">
     <h1>
-      My Account<br />
+      Plockity Account<br />
       <small>{{subroute}}</small>
     </h1>
   </div>
   <ul class="nav nav-tabs top-tabs" role="tablist">
-    <li>{{#link-to 'account.index' role="tab" data-toggle="tab"}}Overview{{/link-to}}</li>
-    <li>{{#link-to 'account.apps' role="tab" data-toggle="tab"}}Applications{{/link-to}}</li>
-    <li><a href="#">Messages</a></li>
+    <li>
+      {{~#link-to 'account.index' role="tab" data-toggle="tab"}}
+        <i class="fa fa-fw fa-user"></i> Overview
+        {{~#if session.currentUser.alerts.overview}} 
+          <i class="fa fa-fw fa-exclamation-circle text-danger"></i>
+        {{~/if}}
+      {{~/link-to}}
+    </li>
+    <li>
+      {{~#link-to 'account.apps' role="tab" data-toggle="tab"}}
+        <i class="fa fa-fw fa-terminal"></i> Applications
+        {{~#if session.currentUser.alerts.applications}} 
+          <i class="fa fa-fw fa-exclamation-circle text-danger"></i>
+        {{~/if}}
+      {{~/link-to}}
+    </li>
+    <li>
+      {{~#link-to 'account.billing' role="tab" data-toggle="tab"}}
+        <i class="fa fa-fw fa-credit-card"></i> Billing
+        {{~#if session.currentUser.alerts.billing}} 
+          <i class="fa fa-fw fa-exclamation-circle"></i>
+        {{~/if}}
+      {{~/link-to}}
+    </li>
+    <li>
+      {{~#link-to 'account.settings' role="tab" data-toggle="tab"}}
+        <i class="fa fa-fw fa-cogs"></i> Settings
+        {{~#if session.currentUser.alerts.billing}} 
+          <i class="fa fa-fw fa-exclamation-circle text-danger"></i>
+        {{~/if}}
+      {{~/link-to}}
+    </li>
   </ul>
 </div>
 {{outlet}}

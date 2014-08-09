@@ -1,0 +1,53 @@
+<button class="btn btn-primary" {{action "showModal" 'account-transaction-modal' false 'body'}}>Transaction modal</button>
+
+{{#bs-modal id="account-transaction-modal" dismissible=true title='<h2><i class="fa fa-fw fa-credit-card"></i> Transaction</h2>'}}
+  <form {{action "processBilling" on="submit"}}>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Name your payment method</label>
+        {{input type="text" class="form-control" value=name placeholder="Payment Method Name (ex. Checking)"}}
+      </div>
+      <h2>Payment Information</h2>
+      {{braintree-form}}
+      <hr />
+      <h2>Billing Information</h2>
+      <div class="form-group">
+        <label>Street Address</label>
+        {{input type="text" class="form-control" value=addressLine1 placeholder="ex. 1234 Mulberry Street"}}
+      </div>
+      <div class="form-group">
+        {{input type="text" class="form-control" value=addressLine2 placeholder="Apt./Suite #"}}
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>City</label>
+            {{input type="text" class="form-control" value=city placeholder="City"}}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>State</label>
+            {{view "select-state" value=state}}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Zipcode</label>
+            {{input type="text" class="form-control" value=zipcode placeholder="5-digit Zipcode"}}
+          </div>
+        </div>
+      </div>
+      <p class="help-block">We do accept international transactions through <i>Braintree</i>. Please try to submit your billing information before asking for assistance.</p>
+    </div>
+    <div class="modal-footer">
+      <p class="text-muted text-center"><small>By clicking "Add Payment Method", you are agreeing to our Terms and Conditions. Your card will be charged after any applicable trial dates. To cancel your subscription, please remove your payment method or downgrade all applications using a paid plan. Please allow up to <i>one day</i> for applications to be downgraded.</small></p>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success btn-lg btn-block">Add Payment Method</button>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </form>
+{{/bs-modal}}

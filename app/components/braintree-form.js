@@ -38,11 +38,15 @@ export default Ember.Component.extend({
     console.debug("tokenDidChange");
 
     if(token) {
-      var $container = this.$().find('.braintree-container');
-      console.debug("Setting up container for braintree");
-      console.debug("Have container jQuery object?", $container.length > 0);
+      var $container = this.$().find('.braintree-container'),
+          self       = this;
+      console.log(self);
+
       braintree.setup(token, 'dropin', {
-        container: $container
+        container: $container,
+        paymentMethodNonceReceived: function (event, nonce) {
+          self.get('targetObject').set('paymentNonce', nonce);
+        }
       });
     }
   }.observes('token')
