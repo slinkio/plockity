@@ -5,7 +5,9 @@
     "PlockityENV": true,
     "$": true,
     "moment": true,
-    "Braintree": true
+    "Braintree": true,
+    "braintree": true,
+    "NProgress": true
   },
   "browser" : true,
   "boss" : true,

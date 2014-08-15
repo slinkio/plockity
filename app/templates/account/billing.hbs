@@ -1,4 +1,17 @@
-<button class="btn btn-primary" {{action "showModal" 'account-transaction-modal' false 'body'}}>Transaction modal</button>
+<div class="payment-method-list-wrapper">
+  <ul class="nav nav-tabs app-tabs" role="tablist">
+    <li><a href="#" role="tab" data-toggle="tab" {{action "showModal" 'account-transaction-modal' false 'body'}}><i class="fa fa-fw fa-plus"></i> Add Payment Method...</a></li>
+  </ul>
+  <div class="payment-methods list-group">
+    {{#each PaymentMethod in content}}
+      {{render "payment-method-item" PaymentMethod}}
+    {{else}}
+      <div class="list-group-item">
+        <h2 class="text-center">No Payment Methods. Click "Add Payment Method" to add one. <i class="fa fa-fw fa-rotate-90 fa-mail-reply pull-right"></i></h2>
+      </div>
+    {{/each}}
+  </div>
+</div>
 
 {{#bs-modal id="account-transaction-modal" dismissible=true title='<h2><i class="fa fa-fw fa-credit-card"></i> Transaction</h2>'}}
   <form {{action "processBilling" on="submit"}}>
@@ -42,8 +55,15 @@
     </div>
     <div class="modal-footer">
       <p class="text-muted text-center"><small>By clicking "Add Payment Method", you are agreeing to our Terms and Conditions. Your card will be charged after any applicable trial dates. To cancel your subscription, please remove your payment method or downgrade all applications using a paid plan. Please allow up to <i>one day</i> for applications to be downgraded.</small></p>
+
+      {{#if formStatus}}
+        {{#bs-alert type=formStatus.type}}
+          <p class="text-center">{{formStatus.msg}}</p>
+        {{/bs-alert}}
+      {{/if}}
+
       <div class="form-group">
-        <button type="submit" class="btn btn-success btn-lg btn-block">Add Payment Method</button>
+        <button type="submit" class="btn btn-success btn-lg btn-block" {{bind-attr disabled=notAllowSubmit}}>Add Payment Method {{#if loading}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-block" data-dismiss="modal">Cancel</button>

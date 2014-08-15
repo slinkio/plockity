@@ -12,6 +12,7 @@ export default DS.Model.extend({
   
   // Relational
   app: DS.hasMany('app', { async: true }),
+  paymentMethod: DS.hasMany('paymentMethod', { async: true }),
 
   // Computed
   fullName: function () {

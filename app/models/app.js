@@ -7,8 +7,9 @@ export default DS.Model.extend({
   domain:  attribute('string'),
 
   // Relational
-  plan:    DS.belongsTo('plan'),
-  creator: DS.belongsTo('user', { async: true }),
+  plan:          DS.belongsTo('plan'),
+  creator:       DS.belongsTo('user', { async: true }),
+  paymentMethod: DS.belongsTo('payment-method', { async: true }),
 
   // System
   time_stamp: attribute('string', {

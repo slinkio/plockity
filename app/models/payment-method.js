@@ -4,7 +4,8 @@ var attribute = DS.attr;
 
 export default DS.Model.extend({
   // Relational
-  customerId:   DS.belongsTo('user'),
+  user:   DS.belongsTo('user'),
+  app:    DS.hasMany('app'),
 
   // Billing Data
   name:         attribute('string'), // This is the customer-friendly payment name
@@ -12,7 +13,7 @@ export default DS.Model.extend({
   addressLine2: attribute('string'),
   city:         attribute('string'),
   state:        attribute('string'),
-  zipcode       attribute('string'),
+  zipcode:       attribute('string'),
 
   // Options
   isDefault:    attribute('boolean'),

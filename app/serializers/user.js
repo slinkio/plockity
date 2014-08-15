@@ -34,6 +34,7 @@ export default DS.RESTSerializer.extend({
         password: user.get('password')
       },
       app:        user.get('app').mapProperty('id'),
+      paymentMethod: user.get('paymentMethod').mapProperty('id'),
       time_stamp: user.get('time_stamp')
     };
     console.debug("payload", json);

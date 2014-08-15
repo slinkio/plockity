@@ -45,7 +45,10 @@
     "currentPath",
     "currentRouteName",
     "$",
-    "moment"
+    "moment",
+    "Braintree",
+    "braintree",
+    "NProgress"
   ],
   "node": false,
   "browser": false,

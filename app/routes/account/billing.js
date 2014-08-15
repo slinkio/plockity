@@ -3,4 +3,7 @@ import AuthenticatedRouteMixin from '../../mixins/authenticated-route';
 import LoadableRouteMixin from '../../mixins/loadable-route';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, LoadableRouteMixin, {
+  model: function () {
+    return this.store.find('payment-method');
+  }
 });

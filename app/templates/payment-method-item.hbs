@@ -1,0 +1,37 @@
+<h4>
+  {{content.name}}&nbsp;
+  <small>
+    {{#if content.isDefault}}
+      Default
+    {{else}}
+      (<a href="#" class="tooltip-trigger" title="Make this the default payment method for all of your apps with paid plans." {{action "makeDefault" content}}>Make Default</a>)
+    {{/if}}
+  </small>
+  <div class="pull-right payment-method-item-controls">
+    <a href="#" {{action "toggleProperty" "showingDetails"}}>
+      <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
+    </a>
+    <a href="#" {{action "deletePaymentMethod"}}>
+      <i class="text-danger fa fa-fw fa-trash-o"></i>
+    </a>
+  </div>
+</h4>
+
+<div {{bind-attr class=":payment-method-item-details :hide-slide showingDetails:show"}}>
+  <hr />
+  <div class="row">
+    {{#with content}}
+      <div class="col-md-6">
+        <h5>
+          Address:<br /> 
+          {{addressLine1}}<br />
+          {{#if addressLine2}}{{addressLine2}}<br />{{/if}}
+          {{city}}, {{state}}, {{zipcode}}
+        </h5>
+      </div>
+      <div class="col-md-6">
+        <h5>Created: {{time-ago time_stamp}}</h5>
+      </div>
+    {{/with}}
+  </div>
+</div>

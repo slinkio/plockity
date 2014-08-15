@@ -73,18 +73,6 @@ export default Ember.Controller.extend({
         plan:    data.plan
       });
 
-      var handleError = function (res) {
-        console.error(res);
-        var ext = (res && res.statusText) ? ": " + res.statusText : ".";
-        self.setProperties({
-          formStatus: {
-            type: "danger",
-            msg: "There was an error creating your app" + ext
-          },
-          loading: false
-        });
-      };
-
       app.save().then(function (app) {
         console.log(app);
 
@@ -101,12 +89,21 @@ export default Ember.Controller.extend({
             plan:           null
           });
 
-        }).catch(function (res) {
-          handleError.apply(this, res);
+        }, handleError);
+
+      }, handleError);
+
+      var handleError = function (res) {
+        console.error(res);
+        var ext = (res && res.statusText) ? ": " + res.statusText : ".";
+        self.setProperties({
+          formStatus: {
+            type: "danger",
+            msg: "There was an error creating your app" + ext
+          },
+          loading: false
         });
-      }).catch(function (res) {
-        handleError.apply(this, res);
-      });
+      };
     }
   }
 });
