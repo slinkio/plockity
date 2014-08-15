@@ -4,6 +4,7 @@ export default DS.RESTSerializer.extend({
   normalizeHash: {
     paymentMethod: function (hash) {
       hash.id = hash._id;
+      hash.user = hash.customerId;
 
       if( hash.address ) {
         hash.addressLine1 = hash.address.line1;
@@ -14,6 +15,7 @@ export default DS.RESTSerializer.extend({
       }
 
       delete hash.address;
+      delete hash.customerId;
       delete hash.__v;
       delete hash._id;
 
@@ -21,7 +23,6 @@ export default DS.RESTSerializer.extend({
     }
   },
   serialize: function (pM) {
-    console.log('serializing paymentMethod, user here', pM.get('user'));
     var json = {
       name: pM.get('name'),
       isDefault: pM.get('isDefault'),

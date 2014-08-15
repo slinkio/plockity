@@ -41,9 +41,9 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
       _id:        app.get('id'),
       name:       app.get('name'),
       domain:     app.get('domain'),
-      creator:    app.get('creator').get('id'),
-      plan:       app.get('plan').get('id'),
-      paymentMethod: app.get('paymentMethod').get('id'),
+      creator:    app.get('creator.id'),
+      plan:       app.get('plan.id'),
+      paymentMethod: app.get('paymentMethod.id'),
       time_stamp: app.get('time_stamp')
     };
 

@@ -21,7 +21,7 @@ export default DS.RESTSerializer.extend({
     }
   },
   serialize: function (user) { // Options param available
-    console.debug("record", user);
+    console.debug("record", user.get('app'));
     var json = {
       _id:        user.get('id'),
       name: {

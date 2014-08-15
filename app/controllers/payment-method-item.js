@@ -16,9 +16,11 @@ export default Ember.Controller.extend({
 
       currentUser.get('paymentMethod').then(function ( paymentMethods ) {
 
-        paymentMethods.removeObject(paymentMethod);
+        paymentMethods.removeObject(paymentMethod.get('id'));
 
         paymentMethod.destroyRecord();
+
+        currentUser.save();
 
       }, handleError);
 
