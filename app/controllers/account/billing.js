@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
           // Add paymentMethod to user
           currentUser.get('paymentMethod').addObject(PaymentMethod);
 
-          currentUser.save().then(function ( /* Record */ ) {
+          currentUser.save().then(function ( /* record */ ) {
 
             self.send('hideModal', 'account-transaction-modal');
 
@@ -95,6 +95,24 @@ export default Ember.Controller.extend({
         });
       };
 
+    },
+
+    makeDefault: function ( paymentMethod ) {
+      var currentUser = this.session.get('currentUser.content');
+
+      currentUser.get('paymentMethod').then(function ( paymentMethods ) {
+        var defaultMethod = paymentMethods.findBy('isDefault', true);
+
+        if( defaultMethod ) {
+          defaultMethod.set('isDefault', false);
+
+          defaultMethod.save();
+        }
+
+        paymentMethod.set('isDefault', true);
+
+        paymentMethod.save();
+      });
     }
   }
 });
