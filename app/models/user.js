@@ -19,7 +19,13 @@ export default DS.Model.extend({
     return this.get('firstName') + ' ' + this.get('lastName');
   }.property('firstName', 'lastName'),
 
+  isAdmin: function () {
+    // Just used for visual layout
+    return this.get('type') === 'admin';
+  }.property('type'),
+
   // System
+  type: attribute('string'),
   time_stamp: attribute('string', {
     defaultValue: function () {
       return moment().format("YYYY/MM/DD HH:mm:ss");

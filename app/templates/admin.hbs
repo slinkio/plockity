@@ -1,0 +1,32 @@
+<div class="hero hero-account">
+  <div class="hero-content">
+    <h1>
+      Administration<br />
+      <small>{{subroute}}</small>
+    </h1>
+  </div>
+  <ul class="nav nav-tabs slanted" role="tablist">
+    <li>
+      {{~#link-to 'admin.index' role="tab" data-toggle="tab"}}
+        Index
+      {{~/link-to}}
+    </li>
+    <li>
+      {{~#link-to 'admin.plans' role="tab" data-toggle="tab"}}
+        Plans
+      {{~/link-to}}
+    </li>
+    <li>
+      {{~#link-to 'admin.users' role="tab" data-toggle="tab"}}
+        <i class="fa fa-fw fa-users"></i> Users
+      {{~/link-to}}
+    </li>
+    <li>
+      {{~#link-to 'admin.settings' role="tab" data-toggle="tab"}}
+        <i class="fa fa-fw fa-cogs"></i> Settings
+      {{~/link-to}}
+    </li>
+  </ul>
+</div>
+
+{{outlet}}

@@ -21,8 +21,6 @@ export default Ember.Object.extend({
   logout: function () {
     var self = this;
 
-    console.debug("logging out");
-    
     // Find the session
     this.store.find('session', this.get('content.id')).then(function (session) {
       // Delete the session
@@ -30,8 +28,7 @@ export default Ember.Object.extend({
       // Reset props
       self.setProperties({
         authenticated: false,
-        content: null,
-        currentUser: null
+        content: null
       });
     });
 
@@ -43,8 +40,6 @@ export default Ember.Object.extend({
   },
   
   login: function (data) {
-    console.debug("logging in");
-
     var self = this;
 
     this.setProperties({

@@ -17,6 +17,12 @@ Router.map(function() {
   this.route('login');
   
   this.route('contact');
+  this.resource('admin', { path: 'administration' }, function () {
+    this.route('index', { path: '/' });
+    this.route('plans', { path: 'manage-plans' });
+    this.route('users', { path: 'users' });
+    this.route('settings', { path: 'settings' });
+  });
 });
 
 export default Router;
