@@ -99,14 +99,12 @@ export default Ember.Object.extend({
     Ember.assert('Session must have currentUser to generate Braintree token', this.get('currentUser.id'));
 
     Ember.$.get('/api/transaction/token', { user: this.get('currentUser.id') }).then(function (res) {
-      console.debug("got token res", res);
       var err   = res.error || null,
           token = res.token || null;
-      console.debug("applying with token", token);
 
-      callback.apply(context, [err, token]);
+      callback.apply(context, [ err, token ]);
     }, function (res) {
-      callback.apply(context, res);
+      callback.apply(context, [ res ]);
     });
   }
 });

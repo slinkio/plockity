@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.RESTSerializer.extend({
   normalizeHash: {
-    user: function (hash) {
+    user: function ( hash ) {
       hash.id    = hash._id;
       hash.email = hash.login.email;
       
@@ -20,10 +20,7 @@ export default DS.RESTSerializer.extend({
       return hash;
     }
   },
-  serialize: function (user) { // Options param available
-    console.debug("record", user.get('app'));
-    console.debug("typeof app", typeof user.get('app'));
-
+  serialize: function ( user ) { // Options param available
     var json = {
       _id:        user.get('id'),
       name: {
@@ -35,11 +32,11 @@ export default DS.RESTSerializer.extend({
         email:    user.get('email'),
         password: user.get('password')
       },
-      app:        user.get('app').mapProperty('id'),
+      app:           user.get('app').mapProperty('id'),
       paymentMethod: user.get('paymentMethod').mapProperty('id'),
       time_stamp: user.get('time_stamp')
     };
-    console.debug("payload", json);
+
     return json;
   }
 });

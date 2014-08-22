@@ -77,17 +77,23 @@ export default Ember.Controller.extend({
         console.log(app);
 
         currentUser.get('app').addObject(app);
-        currentUser.save().then(function () {
 
-          self.send('hideModal', 'add-app-modal');
+        // Workaround for hasMany issue :: See https://github.com/emberjs/data/pull/1535
+        // This grabs the app before saving currentUser
+        currentUser.get('paymentMethod').then(function ( /* records */ ) {
 
-          self.setProperties({
-            parsedAppError: null,
-            loading:        false,
-            appDomain:      null,
-            appName:        null,
-            plan:           null
-          });
+          currentUser.save().then(function () {
+
+            self.send('hideModal', 'add-app-modal');
+
+            self.setProperties({
+              parsedAppError: null,
+              loading:        false,
+              appDomain:      null,
+              appName:        null,
+              plan:           null
+            });
+          }, handleError);
 
         }, handleError);
 

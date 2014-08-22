@@ -27,7 +27,6 @@ export default Ember.Controller.extend({
       var handleError = function ( res ) {
         console.error( res );
       };
-
     }
   }
 });

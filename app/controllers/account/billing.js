@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
 
       var paymentMethodData = this.getProperties('addressLine1', 'addressLine2', 'city', 'state', 'zipcode', 'name'),
           currentUser       = this.session.get('currentUser.content');
-      
+      console.debug('user->app before creating pm', currentUser.get('app'));
       // Set the pre-retrieved nonce
       paymentMethodData.nonce = nonce;
       // Should be able to get this sync, currentUser is already preloaded via AuthenticatedRouteMixin
@@ -58,21 +58,28 @@ export default Ember.Controller.extend({
 
         paymentMethod.save().then(function ( PaymentMethod ) {
           // Add paymentMethod to user
-          currentUser.get('paymentMethod').addObject(PaymentMethod);
+          currentUser.get('paymentMethod').addObject( PaymentMethod );
+          // Workaround for hasMany issue :: See https://github.com/emberjs/data/pull/1535
+          // This grabs the app before saving currentUser
+          currentUser.get('app').then(function (/* records */) {
 
-          currentUser.save().then(function ( /* record */ ) {
+            currentUser.save().then(function ( u ) {
 
-            self.send('hideModal', 'account-transaction-modal');
+              console.debug('user->app after creating pm', u.get('app'));
 
-            self.setProperties({
-              name: null,
-              addressLine1: null,
-              addressLine2: null,
-              city: null,
-              state: null,
-              zipcode: null,
-              loading: false
-            });
+              self.send('hideModal', 'account-transaction-modal');
+
+              self.setProperties({
+                name: null,
+                addressLine1: null,
+                addressLine2: null,
+                city: null,
+                state: null,
+                zipcode: null,
+                loading: false
+              });
+
+            }, handleError);
 
           }, handleError);
 
