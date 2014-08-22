@@ -89,9 +89,8 @@ export default Ember.Object.extend({
     if(!this.get('content.user') || !this.get('authenticated')) {
       return;
     }
-    Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
 
-    var self = this;
+    Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
 
     return this.store.find('user', this.get('content.user'));
   }.property('content.user', 'authenticated'),

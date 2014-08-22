@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-6">
+    <h4>
+      <span class="text-warning">${{content.price}}</span> : 
+      {{content.title}} <br />
+      <small>
+        <i>{{content.tagline}}</i> - {{content.description}}
+      </small>
+    </h4>
+
+    <a href="#" {{action "toggleProperty" "showingFeatures"}}>
+      {{~#if showingFeatures}}
+        Hide
+      {{else}}
+        Show
+      {{~/if}}
+       Features
+    </a>
+
+    {{#if showingFeatures}}
+      <hr />
+      {{#each feature in content.features}}
+        <span class="label label-warning label-spaced">
+          {{feature}}
+        </span>
+      {{/each}}
+    {{/if}}
+  </div>
+  <div class="col-md-6">
+    <h4>
+      <div class="pull-right list-item-controls">
+        <a href="#" {{action "deletePlan"}}>
+          <i class="text-danger fa fa-fw fa-trash-o"></i>
+        </a>
+      </div>
+    </h4>
+  </div>
+</div>

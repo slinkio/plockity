@@ -1,0 +1,73 @@
+<div class="item-list-wrapper">
+  <ul class="nav nav-tabs item-list-tabs" role="tablist">
+    <li><a href="#" role="tab" data-toggle="tab" {{action "showModal" 'add-plan-modal' false}}><i class="fa fa-fw fa-plus"></i> Create Plan</a></li>
+  </ul>
+  <div class="items list-group">
+    {{#each plan in content}}
+      {{render "admin-plan-item" plan}}
+    {{else}}
+      <div class="list-group-item">
+        <h2 class="text-center">No plans available. Click "Create Plan" to add one. <i class="fa fa-fw fa-rotate-90 fa-mail-reply pull-right"></i></h2>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<h4 class="text-center text-muted">
+  <i class="fa fa-exclamation-triangle"></i> The Plockity app is designed for a maximum of 3 plans. Adding more may cause display issues.
+</h4>
+
+{{#bs-modal id="add-plan-modal" dismissible=true title='<h2>Add a new Plan</h2>'}}
+  <form {{action "createPlan" on="submit"}} onkeypress="return event.keyCode != 13;">
+    <div class="modal-body">
+      <h3>Pricing</h3>
+      <div class="form-group">
+        <label>Monthly Plan Price</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          {{input type="number" class="form-control" value=price placeholder="14.99"}}
+        </div>
+      </div>
+      <hr />
+
+      <h3>Description</h3>
+      <div class="form-group">
+        <label>Name</label>
+        {{input type="text" class="form-control" value=title placeholder="Developer"}}
+      </div>
+      <div class="form-group">
+        <label>Short Description</label>
+        {{input type="text" class="form-control" value=description placeholder="A great option for solo developers"}}
+      </div>
+      <div class="form-group">
+        <label>Tagline</label>
+        {{input type="text" class="form-control" value=tagline placeholder="Free Plan"}}
+      </div>
+      <hr />
+
+      <h3>Features</h3>
+      <div class="form-group">
+        {{input type="text" class="form-control" value=featureToAdd placeholder="Type feature and hit enter..." action="addFeature" bubbles=false}}
+      </div>
+      {{#each feature in features}}
+        <span class="label label-warning label-spaced">
+          {{feature}} 
+          <a href="#" {{action "removeFeature" feature}}><i class="fa fa-times"></i></a>
+        </span>
+      {{/each}}
+    </div>
+    <div class="modal-footer">
+      {{#if formStatus}}
+        {{#bs-alert type=formStatus.type}}
+          <p class="text-center">{{formStatus.msg}}</p>
+        {{/bs-alert}}
+      {{/if}}
+
+      <button type="submit" class="btn btn-lg btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Create Plan{{#if loading}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>
+
+      {{#if priceGtZero}}
+        <p class="help-block text-center">This plan must be added in the Braintree control panel for proper billing.</p>
+      {{/if}}
+    </div>
+  </form>
+{{/bs-modal}}

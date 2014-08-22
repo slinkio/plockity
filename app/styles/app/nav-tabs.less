@@ -17,3 +17,26 @@
     }
   }
 }
+
+.nav.nav-tabs.item-list-tabs {
+  border: none;
+
+  li {
+    float: right;
+
+    a {
+      background-color: white;
+      color: @brand-primary;
+      border: 1px solid @list-group-border;
+      
+      &:hover {
+        background-color: @brand-offwhite;
+      }
+      
+      &.active {
+        background-color: @brand-offwhite;
+        color: @brand-default;
+      }
+    }
+  }
+}
