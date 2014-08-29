@@ -2,10 +2,12 @@ import DS from 'ember-data';
 
 export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
-    plan: { embedded: 'always' }
+    plan: { embedded: 'always' },
+    paymentMethod: { serialize: 'ids', deserialize: 'records' }
   },
   normalizeHash: {
-    app: function (hash) {
+    app: function ( hash ) {
+      console.log(hash);
       hash.id = hash._id;
 
       delete hash.__v;

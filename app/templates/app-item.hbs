@@ -30,7 +30,8 @@
     <h4>This app is subscribed to a free plan.</h4>
   {{else}}
     <h4>Billing Details</h4>
-    {{#if content.paymentMethod}}
+    {{log content.paymentMethod.content}}
+    {{#if content.paymentMethod.id}}
       <p>You are currently paying for {{content.name}} with {{content.paymentMethod.name}}. Your next charge will be {{time-ago content.paymentMethod.nextCharge}} on {{format-moment content.paymentMethod.nextCharge}}</p>
     {{else}}
       <p><i class="fa fa-exclamation-triangle"></i> Your app is currently inactive. {{#if session.currentUser.paymentMethod}}Please assign a payment method to this app.{{else}}Please add a payment method.{{/if}}</p>
@@ -67,7 +68,7 @@
     <div class="form-group">
       <label>Pay with</label>
       {{content.paymentMethod.name}}
-      {{view Ember.Select class="form-control" content=session.currentUser.paymentMethod optionLabelPath="content.name" value=content.paymentMethod prompt="Default Card"}}
+      {{view "select-card" class="form-control" content=session.currentUser.paymentMethod optionLabelPath="content.name" optionValuePath="content.id" value=content.paymentMethod}}
     </div>
     <div class="pricing">
       <label>App plan</label>
