@@ -16,9 +16,10 @@ export default Ember.Controller.extend({
     return (data.name && data.domain && data.plan && data.plan.get('id') && !this.get('loading') && data.isDirty);
   }.property('content.name', 'content.domain', 'content.plan', 'content.isDirty', 'loading'),
 
-  planChanged: function () {
-    this.get('content').send('becomeDirty');
-  }.observes('content.plan'),
+  planOrPaymentMethodChanged: function () {
+    var m = this.get('content');
+    m.send('becomeDirty');
+  }.observes('content.plan', 'content.paymentMethod'),
 
   actions: {
     toggleProperty: function (prop) {
