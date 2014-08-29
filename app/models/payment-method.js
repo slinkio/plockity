@@ -13,7 +13,7 @@ export default DS.Model.extend({
   addressLine2: attribute('string'),
   city:         attribute('string'),
   state:        attribute('string'),
-  zipcode:       attribute('string'),
+  zipcode:      attribute('string'),
 
   // Options
   isDefault:    attribute('boolean'),
