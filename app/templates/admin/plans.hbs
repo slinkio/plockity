@@ -66,7 +66,7 @@
       <button type="submit" class="btn btn-lg btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Create Plan{{#if loading}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>
 
       {{#if priceGtZero}}
-        <p class="help-block text-center">This plan must be added in the Braintree control panel for proper billing.</p>
+        <p class="help-block text-center">This plan must be added in the Braintree control panel for proper billing. Make sure the <code>title</code> is the <strong>same</strong> as the braintree plan id when the title is lowercase and spaces are replaced with _</p>
       {{/if}}
     </div>
   </form>

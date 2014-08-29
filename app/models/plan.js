@@ -7,5 +7,10 @@ export default DS.Model.extend({
   description: attribute('string'),
   tagline:     attribute('string'),
   title:       attribute('string'),
-  features:    attribute('array')
+  features:    attribute('array'),
+
+  // Computed
+  isFree: function () {
+    return this.get('price') <= 0;
+  }.property('price')
 });
