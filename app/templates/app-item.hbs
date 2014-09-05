@@ -36,11 +36,13 @@
     {{else}}
       <p><i class="fa fa-exclamation-triangle"></i> Your app is currently inactive. {{#if session.currentUser.paymentMethod}}Please assign a payment method to this app.{{else}}Please add a payment method.{{/if}}</p>
 
-      {{#if session.currentUser.paymentMethod}}
-        <a href="#" {{action "toggleProperty" "isEditing"}}>Assign card to app...</a>
-      {{else}}
-        {{#link-to 'account.billing'}}Click here to add a card...{{/link-to}}
-      {{/if}}
+      {{#link-to 'account.billing'}}
+        {{#if session.currentUser.paymentMethod}}
+          Assign card to app...
+        {{else}}
+          Click here to add a card...
+        {{/if}}
+      {{/link-to}}
     {{/if}}
   {{/if}}
 </div>
@@ -64,11 +66,6 @@
     <div class="form-group">
       <label>App domain<br /><i class="text-muted"><i class="fa fa-info-circle fa-fw"></i> Please exlude subdomains and ports</i></label>
       {{input type="url" class="form-control input-sm" value=content.domain placeholder="Domain* (ex. mysite.com)"}}
-    </div>
-    <div class="form-group">
-      <label>Pay with</label>
-      {{content.paymentMethod.name}}
-      {{view "select-card" class="form-control" content=session.currentUser.paymentMethod optionLabelPath="content.name" optionValuePath="content.id" value=content.paymentMethod}}
     </div>
     <div class="pricing">
       <label>App plan</label>

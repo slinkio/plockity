@@ -5,8 +5,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('prototypes');
-  
+  this.route('login');
+  this.route('contact');
+
   this.resource('account', { path: 'my-account' }, function () {
     this.route('index', { path: '/' });
     this.route('apps', { path: 'applications' });
@@ -14,9 +15,6 @@ Router.map(function() {
     this.route('settings');
   });
 
-  this.route('login');
-  
-  this.route('contact');
   this.resource('admin', { path: 'administration' }, function () {
     this.route('index', { path: '/' });
     this.route('plans', { path: 'manage-plans' });

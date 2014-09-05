@@ -21,38 +21,37 @@ export default Ember.Controller.extend({
 
   formatEntries: function () {
     var entries = this.get('entries'),
-        self = this;
-    console.debug("entryDidChange");
+        self    = this;
+
     entries.forEach(function (entry) {
-      console.debug("in entry", entry._valName);
-      if(typeof entry.format === "function") {
+      if( typeof entry.format === "function" ) {
         return self.set(entry._valName, entry.format(self.get(entry._valName)));
       }
     });
   },
 
   showPlans: function () {
-    return (this.get('appName') && this.get('appDomain'));
+    return ( this.get('appName') && this.get('appDomain') );
   }.property('appName', 'appDomain'),
 
   allowSubmit: function () {
     var data = this.getProperties('appName', 'appDomain', 'plan', 'loading');
     // Return data validity
-    return (data.appName && data.appDomain && data.plan && data.plan.get('id') && !data.loading);
+    return ( data.appName && data.appDomain && data.plan && data.plan.get('id') && !data.loading );
   }.property('appName', 'appDomain', 'plan', 'loading'),
 
   actions: {
     createApp: function () {
-      var self = this,
+      var self           = this,
           notAllowSubmit = this.get('notAllowSubmit'),
-          currentUser = this.session.get('currentUser.content');
+          currentUser    = this.session.get('currentUser.content');
 
       this.setProperties({
         formStatus: null,
         loading:    true
       });
 
-      if(notAllowSubmit) {
+      if( notAllowSubmit ) {
         return this.setProperties({
           formStatus: {
             type: 'danger',
@@ -64,7 +63,7 @@ export default Ember.Controller.extend({
       
       var data = this.getProperties('appName', 'appDomain', 'plan');
 
-      console.debug(this.session.get('currentUser.content'));
+      console.debug( this.session.get('currentUser.content') );
 
       var app = this.store.createRecord('app', {
         name:    data.appName,
@@ -76,28 +75,31 @@ export default Ember.Controller.extend({
       app.save().then(function (app) {
         console.log(app);
 
-        currentUser.get('app').addObject(app);
+        currentUser.get('app').then(function ( apps ) {
+          apps.addObject(app);
 
-        // Workaround for hasMany issue :: See https://github.com/emberjs/data/pull/1535
-        // This grabs the app before saving currentUser
-        currentUser.get('paymentMethod').then(function ( /* records */ ) {
+          // Workaround for hasMany issue :: See https://github.com/emberjs/data/pull/1535
+          // This grabs the app before saving currentUser
+          currentUser.get('paymentMethod').then(function ( /* records */ ) {
 
-          currentUser.save().then(function () {
+            currentUser.save().then(function () {
 
-            self.send('hideModal', 'add-app-modal');
+              self.send('hideModal', 'add-app-modal');
 
-            self.setProperties({
-              parsedAppError: null,
-              loading:        false,
-              appDomain:      null,
-              appName:        null,
-              plan:           null
-            });
-          }, handleError);
+              self.setProperties({
+                parsedAppError: null,
+                loading:        false,
+                appDomain:      null,
+                appName:        null,
+                plan:           null
+              });
+            }, handleError); // currentUser.save()
 
-        }, handleError);
+          }, handleError); // currentUser.get('paymentMethod')
 
-      }, handleError);
+        }, handleError); // currentUser.get('app')
+
+      }, handleError); // app.save()
 
       var handleError = function (res) {
         console.error(res);

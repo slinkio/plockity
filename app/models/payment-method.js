@@ -18,7 +18,7 @@ export default DS.Model.extend({
   // Options
   isDefault:    attribute('boolean'),
 
-  // Server does not return this value
+  // Server does not return these values
   nonce:        attribute('string'),
 
   // System

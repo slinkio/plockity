@@ -4,6 +4,6 @@ import LoadableRouteMixin from '../../mixins/loadable-route';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, LoadableRouteMixin, {
   model: function () {
-    return this.session.get('currentUser').get('app');
+    return this.store.find('app');
   }
 });
