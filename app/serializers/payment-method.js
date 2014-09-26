@@ -9,9 +9,9 @@ export default DS.RESTSerializer.extend({
       if( hash.address ) {
         hash.addressLine1 = hash.address.line1;
         hash.addressLine2 = hash.address.line2;
-        hash.city = hash.address.city;
-        hash.state = hash.address.state;
-        hash.zipcode = hash.address.zipcode;
+        hash.city         = hash.address.city;
+        hash.state        = hash.address.state;
+        hash.zipcode      = hash.address.zipcode;
       }
 
       delete hash.address;
@@ -24,22 +24,21 @@ export default DS.RESTSerializer.extend({
   },
   serialize: function (pM) {
     var json = {
-      name: pM.get('name'),
-      isDefault: pM.get('isDefault'),
+      name:       pM.get('name'),
+      isDefault:  pM.get('isDefault'),
 
       customerId: pM.get('user.id'),
       app:        pM.get('app').mapProperty('id'),
 
       address: {
-        line1: pM.get('addressLine1'),
-        line2: pM.get('addressLine2'),
-        city:  pM.get('city'),
-        state: pM.get('state'),
-        zipcode: pM.get('zipcode')
+        line1:    pM.get('addressLine1'),
+        line2:    pM.get('addressLine2'),
+        city:     pM.get('city'),
+        state:    pM.get('state'),
+        zipcode:  pM.get('zipcode')
       },
 
-      nonce: pM.get('nonce'),
-
+      nonce:      pM.get('nonce'),
       time_stamp: pM.get('time_stamp')
     };
 

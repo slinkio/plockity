@@ -30,9 +30,17 @@
     <h4>This app is subscribed to a free plan.</h4>
   {{else}}
     <h4>Billing Details</h4>
-    {{log content.paymentMethod.content}}
     {{#if content.paymentMethod.id}}
-      <p>You are currently paying for {{content.name}} with {{content.paymentMethod.name}}. Your next charge will be {{time-ago content.paymentMethod.nextCharge}} on {{format-moment content.paymentMethod.nextCharge}}</p>
+      <ul>
+        <li><strong>Paying with:</strong> {{content.paymentMethod.name}}</li>
+        {{#if content.subscription}}
+          <li><strong>Next charge date:</strong> {{js-date-timeago content.subscription.nextBillingDate}} on {{js-date-format content.subscription.nextBillingDate}}</li>
+          <li><strong>Next charge amount:</strong> ${{content.subscription.nextBillAmount}}<br />
+          <span class="text-muted">Includes any proration</span></li>
+        {{else}}
+          No Subscription data to show. Please check back in a minute.
+        {{/if}}
+        </ul>
     {{else}}
       <p><i class="fa fa-exclamation-triangle"></i> Your app is currently inactive. {{#if session.currentUser.paymentMethod}}Please assign a payment method to this app.{{else}}Please add a payment method.{{/if}}</p>
 

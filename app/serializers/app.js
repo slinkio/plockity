@@ -5,9 +5,9 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     plan: { embedded: 'always' },
     paymentMethod: { serialize: 'ids', deserialize: 'records' }
   },
+
   normalizeHash: {
     app: function ( hash ) {
-      console.log(hash);
       hash.id = hash._id;
 
       delete hash.__v;
@@ -20,9 +20,19 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         delete hash.plan.__v;
       }
 
+      if(hash.paymentMethod && hash.paymentMethod._id) {
+        hash.paymentMethod.id = hash.paymentMethod._id;
+
+        delete hash.paymentMethod._id;
+        delete hash.paymentMethod.__v;
+      }
+
+      console.log(hash);
+
       return hash;
     }
   },
+
   serialize: function (app) {
     var json = {
       _id:        app.get('id'),
