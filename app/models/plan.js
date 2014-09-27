@@ -8,6 +8,7 @@ export default DS.Model.extend({
   tagline:     attribute('string'),
   title:       attribute('string'),
   features:    attribute('array'),
+  maxRequests: attribute('number'),
 
   // Computed
   isFree: function () {

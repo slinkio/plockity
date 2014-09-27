@@ -6,9 +6,9 @@ export default Ember.ArrayController.extend({
   features: [],
 
   allowSubmit: function () {
-    var d = this.getProperties('price', 'description', 'tagline', 'title', 'features', 'loading');
+    var d = this.getProperties('price', 'description', 'tagline', 'title', 'features', 'maxRequests', 'loading');
 
-    return ( d.description && d.tagline && d.title && d.features && d.features.length > 0 && !d.loading );
+    return ( d.description && d.tagline && d.title && d.maxRequests && d.features && d.features.length > 0 && !d.loading );
   }.property('price', 'description', 'tagline', 'title', 'features.@each', 'loading'),
 
   priceGtZero: function () {
@@ -48,7 +48,7 @@ export default Ember.ArrayController.extend({
         });
       }
 
-      var data = this.getProperties('price', 'description', 'tagline', 'title', 'features');
+      var data = this.getProperties('price', 'description', 'tagline', 'title', 'features', 'maxRequests');
 
       var plan = this.store.createRecord('plan', data);
 

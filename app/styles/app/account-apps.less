@@ -2,7 +2,7 @@
   Account Apps Styles
 */
 
-@expand-height-edit: 680px;
+@expand-height-edit: 500px;
 @expand-height-confirm: 160px;
 
 .account-view.ember-view {
@@ -45,14 +45,21 @@
           h3 {
             background-color: fade(white, 20%);
             padding: 4px;
-            margin: 30px -10px 0 -10px;
-            text-shadow: 1px 1px 1px fade(@brand-default, 80%);
+            margin: 30px -10px 20px -10px;
+            text-shadow: 1px 1px 1px fade(@brand-default, 80%);  
+          }
+
+          h1, h2, h3, h4, p {
+            color: white;
+
+            small {
+              color: white;
+            }
           }
         }
 
         .app-item-edit {
           padding: 10px;
-          color: white;
 
           background: @darkpat,
             linear-gradient(

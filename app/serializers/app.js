@@ -35,13 +35,14 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
 
   serialize: function (app) {
     var json = {
-      _id:        app.get('id'),
-      name:       app.get('name'),
-      domain:     app.get('domain'),
-      creator:    app.get('creator.id'),
-      plan:       app.get('plan.id'),
+      _id:           app.get('id'),
+      name:          app.get('name'),
+      domain:        app.get('domain'),
+      creator:       app.get('creator.id'),
+      plan:          app.get('plan.id'),
       paymentMethod: app.get('paymentMethod.id'),
-      time_stamp: app.get('time_stamp')
+      usingDefault:  app.get('usingDefault'),
+      time_stamp:    app.get('time_stamp')
     };
 
     return json;

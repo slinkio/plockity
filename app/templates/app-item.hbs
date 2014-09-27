@@ -1,17 +1,27 @@
-<h4>
-  {{content.name}}&nbsp;
-  <div class="pull-right app-item-controls">
-    <a href="#" {{action "toggleProperty" "showingDetails"}}>
+<div class="row">
+  <div class="col-sm-4">
+    <h4>{{content.name}}</h4>
+  </div>
+  <div class="col-sm-4">
+    {{progress-bar min=0 max=content.plan.maxRequests value=content.requests displayText=true unit="API Requests"}}
+  </div>
+  <div class="col-sm-4 pull-right app-item-controls">
+    <a href="#" {{action "toggleProperty" "showingDetails"}} title="Show Details">
       <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
     </a>
-    <a href="#" {{action "toggleProperty" "isEditing"}}>
+    {{#unless content.plan.isFree}}
+      <a href="#" {{action "toggleProperty" "isAssigningMethod"}} title="Change Payment Method">
+        <i {{bind-attr class=":text-success :fa :fa-fw :fa-credit-card isAssigningMethod:active"}}></i>
+      </a>
+    {{/unless}}
+    <a href="#" {{action "toggleProperty" "isEditing"}} title="Edit">
       <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
     </a>
-    <a href="#" {{action "toggleProperty" "confirmDelete"}}>
+    <a href="#" {{action "toggleProperty" "confirmDelete"}} title="Delete">
       <i {{bind-attr class=":text-danger :fa :fa-fw :fa-trash-o confirmDelete:active"}}></i>
     </a>
   </div>
-</h4>
+</div>
 
 <div {{bind-attr class=":app-item-details :hide-slide showingDetails:show"}}>
   <hr />
@@ -32,25 +42,25 @@
     <h4>Billing Details</h4>
     {{#if content.paymentMethod.id}}
       <ul>
-        <li><strong>Paying with:</strong> {{content.paymentMethod.name}}</li>
+        <li><strong>Paying with:</strong> {{content.paymentMethod.name}}{{#if content.paymentMethod.isDefault}} <small class="text-muted">Default Card</small>{{/if}}</li>
         {{#if content.subscription}}
           <li><strong>Next charge date:</strong> {{js-date-timeago content.subscription.nextBillingDate}} on {{js-date-format content.subscription.nextBillingDate}}</li>
-          <li><strong>Next charge amount:</strong> ${{content.subscription.nextBillAmount}}<br />
-          <span class="text-muted">Includes any proration</span></li>
+          <li><strong>Next charge amount:</strong> ${{content.subscription.nextBillAmount}}*</li>
+          <br />
+          <small class="text-muted text-center">* Includes any proration</small>
         {{else}}
           No Subscription data to show. Please check back in a minute.
         {{/if}}
         </ul>
     {{else}}
       <p><i class="fa fa-exclamation-triangle"></i> Your app is currently inactive. {{#if session.currentUser.paymentMethod}}Please assign a payment method to this app.{{else}}Please add a payment method.{{/if}}</p>
-
-      {{#link-to 'account.billing'}}
-        {{#if session.currentUser.paymentMethod}}
-          Assign card to app...
-        {{else}}
-          Click here to add a card...
-        {{/if}}
-      {{/link-to}}
+      
+      {{#if session.currentUser.paymentMethod}}
+        <a href="#" {{action "showModal"}}>Assign card to app...</a>
+      {{else}}
+        {{#link-to 'account.billing'}}Click here to add a payment method...{{/link-to}}
+      {{/if}}
+      
     {{/if}}
   {{/if}}
 </div>
@@ -89,4 +99,39 @@
       <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Save</button>
     </div>
   </form>
+</div>
+
+<div {{bind-attr class=":app-item-edit :hide-slide isAssigningMethod:show"}}>
+  <a href="#" class="close-edit" {{action "toggleProperty" "isAssigningMethod"}}><i class="fa fa-fw fa-2x fa-times-circle"></i></a>
+  <h3>
+    Change Payment Method for {{content.name}}...<br />
+    <small>Click a payment method to assign it</small>
+  </h3>
+
+  <div class="form-group text-center">
+    <label>{{input type="checkbox" checked=content.usingDefault}} Use default payment method{{#if content.usingDefault}} - Uncheck to select a payment method{{/if}}</label>
+  </div>
+
+  {{#if isAssigningMethod}}{{#if session.currentUser.paymentMethod}}
+    <div class="list-group">
+
+      {{#unless content.usingDefault}}
+        {{#each method in paymentMethods}}
+
+            {{#if method.assignedToApp}}
+              <div class="list-group-item active">
+                <i class="fa fa-check fa-fw"></i> {{method.name}}{{#if method.isDefault}} <small class="text-muted">Default Card</small>{{/if}}
+              </div>
+            {{else}}
+              <a href="#" class="list-group-item" {{action "assignMethod" method}}>
+                {{method.name}}{{#if method.isDefault}} <small class="text-muted">Default Card</small>{{/if}}
+              </a>
+            {{/if}}
+
+        {{/each}}
+      {{/unless}}
+
+    </div>
+  {{/if}}{{/if}}
+
 </div>

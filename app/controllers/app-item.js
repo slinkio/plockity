@@ -9,6 +9,22 @@ export default Ember.Controller.extend({
     }
   }.observes('isEditing'),
 
+  usingDefaultChanged: function () {
+    if( this.get('content.isDirty') ) {
+      this.send('saveEdits');
+    }
+  }.observes('content.usingDefault'),
+
+  paymentMethods: function () {
+    var appMethod = this.get('content.paymentMethod');
+
+    return this.get('session.currentUser.paymentMethod').map(function ( method ) {
+      method.assignedToApp = ( appMethod.id === method.id );
+
+      return method;
+    });
+  }.property('session.currentUser.paymentMethod', 'content.paymentMethod'),
+
   allowSubmit: function () {
     var app  = this.get('content'),
         data = app.getProperties('name', 'domain', 'plan', 'isDirty');
@@ -16,26 +32,22 @@ export default Ember.Controller.extend({
     return (data.name && data.domain && data.plan && data.plan.get('id') && !this.get('loading') && data.isDirty);
   }.property('content.name', 'content.domain', 'content.plan', 'content.isDirty', 'loading'),
 
-  planOrPaymentMethodChanged: function () {
-    var m = this.get('content');
-    m.send('becomeDirty');
-  }.observes('content.plan', 'content.paymentMethod'),
-
   actions: {
-    toggleProperty: function (prop) {
-      this.toggleProperty(prop);
+    toggleProperty: function ( prop ) {
+      this.toggleProperty( prop );
     },
+
     saveEdits: function () {
-      var self = this,
+      var self           = this,
           notAllowSubmit = this.get('notAllowSubmit'),
-          app = this.get('content');
+          app            = this.get('content');
 
       this.setProperties({
         formStatus: null,
         loading:    true
       });
 
-      if(notAllowSubmit) {
+      if( notAllowSubmit ) {
         return this.setProperties({
           formStatus: {
             type: 'danger',
@@ -50,7 +62,7 @@ export default Ember.Controller.extend({
             loading:   false,
             isEditing: false
           });
-      }).catch(function (res) {
+      }).catch(function ( res ) {
         console.error(res);
         var ext = (res && res.statusText) ? ": " + res.statusText : ".";
         self.setProperties({
@@ -62,16 +74,29 @@ export default Ember.Controller.extend({
         });
       });
     },
+
     cancelEdits: function () {
       var app = this.get('content');
+
       console.log("isDirty?", app.get('isDirty'));
-      if(app.get('isDirty')) {
+
+      if( app.get('isDirty') ) {
         app.rollback();
       }
+
       this.toggleProperty('isEditing');
     },
+
     deleteApp: function () {
       this.get('content').destroyRecord();
+    },
+
+    assignMethod: function ( method ) {
+      this.get('content').set('paymentMethod', method);
+
+      this.send('saveEdits');
+
+      this.set('isAssigningMethod', false);
     }
   }
 });
