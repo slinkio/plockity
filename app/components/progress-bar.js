@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: [ 'progress' ],
+
   min: 0,
   max: 100,
 
@@ -16,12 +18,6 @@ export default Ember.Component.extend({
   }.property('percent'),
 
   text: function () {
-    var r = this.get('value') + '/' + this.get('max');
-
-    if( this.get('unit') ) {
-      r += ' ' + this.get('unit');
-    }
-
-    return r;
+    return this.get('value') + '/' + this.get('max');
   }.property('max', 'value')
 });

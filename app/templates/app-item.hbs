@@ -3,9 +3,9 @@
     <h4>{{content.name}}</h4>
   </div>
   <div class="col-sm-4">
-    {{progress-bar min=0 max=content.plan.maxRequests value=content.requests displayText=true unit="API Requests"}}
+    {{progress-bar min=0 max=content.plan.maxRequests value=content.requests displayText=true unit="Used"}}
   </div>
-  <div class="col-sm-4 pull-right app-item-controls">
+  <div class="col-sm-4 text-right app-item-controls">
     <a href="#" {{action "toggleProperty" "showingDetails"}} title="Show Details">
       <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
     </a>
