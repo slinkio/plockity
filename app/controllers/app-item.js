@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
       this.toggleProperty( prop );
     },
 
-    saveEdits: function () {
+    saveEdits: function ( override ) {
       var self           = this,
           notAllowSubmit = this.get('notAllowSubmit'),
           app            = this.get('content');
@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
         loading:    true
       });
 
-      if( notAllowSubmit ) {
+      if( notAllowSubmit && !override ) {
         return this.setProperties({
           formStatus: {
             type: 'danger',
@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
     assignMethod: function ( method ) {
       this.get('content').set('paymentMethod', method);
 
-      this.send('saveEdits');
+      this.send('saveEdits', true);
 
       this.set('isAssigningMethod', false);
     }
