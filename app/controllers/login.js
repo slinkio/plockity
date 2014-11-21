@@ -20,12 +20,15 @@ export default Ember.Controller.extend({
     if(!this.session.get('authenticated') || !this.session.get('didSetHeaders')) {
       return;
     }
+
     this.setProperties({
       email:    null,
       password: null
     });
+
     var transition = this.get('savedTransition');
-    if(transition) {
+
+    if( transition ) {
       this.set('savedTransition', null);
       transition.retry();
     } else {
