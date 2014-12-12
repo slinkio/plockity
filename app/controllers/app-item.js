@@ -19,7 +19,9 @@ export default Ember.Controller.extend({
     var appMethod = this.get('content.paymentMethod');
 
     return this.get('session.currentUser.paymentMethod').map(function ( method ) {
-      method.assignedToApp = ( appMethod.id === method.id );
+      if( appMethod && appMethod.id ) {
+        method.assignedToApp = ( appMethod.id === method.id );
+      }
 
       return method;
     });
@@ -27,10 +29,10 @@ export default Ember.Controller.extend({
 
   allowSubmit: function () {
     var app  = this.get('content'),
-        data = app.getProperties('name', 'domain', 'plan', 'isDirty');
+        data = app.getProperties('name', 'url', 'plan');
     // Return data validity
-    return (data.name && data.domain && data.plan && data.plan.get('id') && !this.get('loading') && data.isDirty);
-  }.property('content.name', 'content.domain', 'content.plan', 'content.isDirty', 'loading'),
+    return (data.name && data.url && data.plan && data.plan.get('id') && !this.get('loading'));
+  }.property('content.name', 'content.url', 'content.plan.id', 'loading'),
 
   actions: {
     toggleProperty: function ( prop ) {
@@ -76,13 +78,7 @@ export default Ember.Controller.extend({
     },
 
     cancelEdits: function () {
-      var app = this.get('content');
-
-      console.log("isDirty?", app.get('isDirty'));
-
-      if( app.get('isDirty') ) {
-        app.rollback();
-      }
+      this.get('content').rollback();
 
       this.toggleProperty('isEditing');
     },

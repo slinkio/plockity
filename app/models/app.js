@@ -3,13 +3,11 @@ import DS from 'ember-data';
 var attribute = DS.attr;
 
 export default DS.Model.extend({
-  name:    attribute('string'),
-  domain:  attribute('string'),
+  name: attribute('string'),
+  url:  attribute('string'),
 
   usingDefault: attribute('boolean'),
-  requests:     attribute('number', {
-    defaultValue: 0
-  }),
+  requestsMade: attribute('number'),
 
   // Relational
   plan:           DS.belongsTo('plan'),
@@ -19,9 +17,9 @@ export default DS.Model.extend({
   subscription:   attribute(),
 
   // System
-  time_stamp: attribute('string', {
+  time_stamp: attribute('date', {
     defaultValue: function () {
-      return moment().format("YYYY/MM/DD HH:mm:ss");
+      return new Date();
     }
   })
 });

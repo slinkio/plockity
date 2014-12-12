@@ -37,7 +37,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     var json = {
       _id:           app.get('id'),
       name:          app.get('name'),
-      domain:        app.get('domain'),
+      url:           app.get('url'),
       creator:       app.get('creator.id'),
       plan:          app.get('plan.id'),
       paymentMethod: app.get('paymentMethod.id'),

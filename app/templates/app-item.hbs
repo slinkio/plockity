@@ -3,21 +3,21 @@
     <h4>{{content.name}}</h4>
   </div>
   <div class="col-sm-4">
-    {{progress-bar type="progress-bar-warning" striped=true min=0 max=content.plan.maxRequests value=content.requests displayText=true unit="Used" class="progress-vert-cen"}}
+    {{progress-bar type="progress-bar-warning" striped=true min=0 max=content.plan.maxRequests value=content.requestsMade displayText=true unit="Used" class="progress-vert-cen"}}
   </div>
   <div class="col-sm-4 text-right app-item-controls">
-    <a href="#" {{action "toggleProperty" "showingDetails"}} title="Show Details">
+    <a href="#" {{action "toggleProperty" "showingDetails"}} class="tooltip-trigger" data-placement="bottom" title="Show Details">
       <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
     </a>
     {{#unless content.plan.isFree}}
-      <a href="#" {{action "toggleProperty" "isAssigningMethod"}} title="Change Payment Method">
+      <a href="#" {{action "toggleProperty" "isAssigningMethod"}} class="tooltip-trigger" data-placement="bottom" title="Payment Method">
         <i {{bind-attr class=":text-success :fa :fa-fw :fa-credit-card isAssigningMethod:active"}}></i>
       </a>
     {{/unless}}
-    <a href="#" {{action "toggleProperty" "isEditing"}} title="Edit">
-      <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
+    <a href="#" {{action "toggleProperty" "isEditing"}} class="tooltip-trigger" data-placement="bottom" title="Edit">
+      <i {{bind-attr class=":fa :fa-edit showingDetails:active"}}></i>
     </a>
-    <a href="#" {{action "toggleProperty" "confirmDelete"}} title="Delete">
+    <a href="#" {{action "toggleProperty" "confirmDelete"}} class="tooltip-trigger" data-placement="bottom" title="Delete">
       <i {{bind-attr class=":text-danger :fa :fa-fw :fa-trash-o confirmDelete:active"}}></i>
     </a>
   </div>
@@ -28,10 +28,10 @@
   <div class="row">
     {{#with content}}
       <div class="col-md-6">
-        <h5>Allowed Domain: {{domain}}</h5>
+        <h5>Allowed Domain: {{url}}</h5>
       </div>
       <div class="col-md-6">
-        <h5>Created: {{time-ago time_stamp}}</h5>
+        <h5>Created: {{js-date-timeago time_stamp}}</h5>
       </div>
     {{/with}}
   </div>
@@ -56,7 +56,7 @@
       <p><i class="fa fa-exclamation-triangle"></i> Your app is currently inactive. {{#if session.currentUser.paymentMethod}}Please assign a payment method to this app.{{else}}Please add a payment method.{{/if}}</p>
       
       {{#if session.currentUser.paymentMethod}}
-        <a href="#" {{action "showModal"}}>Assign card to app...</a>
+        <a href="#" {{action "toggleProperty" "isAssigningMethod"}}>Assign card to app...</a>
       {{else}}
         {{#link-to 'account.billing'}}Click here to add a payment method...{{/link-to}}
       {{/if}}
@@ -83,7 +83,7 @@
     </div>
     <div class="form-group">
       <label>App domain<br /><i class="text-muted"><i class="fa fa-info-circle fa-fw"></i> Please exlude subdomains and ports</i></label>
-      {{input type="url" class="form-control input-sm" value=content.domain placeholder="Domain* (ex. mysite.com)"}}
+      {{input type="url" class="form-control input-sm" value=content.url placeholder="Domain* (ex. mysite.com)"}}
     </div>
     <div class="pricing">
       <label>App plan</label>
@@ -95,7 +95,7 @@
         <p class="text-center">{{formStatus.msg}}</p>
       {{/bs-alert}}
     {{/if}}
-    <div {{bind-attr class=":form-group :hide-slide content.isDirty:show"}}>
+    <div class="form-group">
       <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=notAllowSubmit}}>Save</button>
     </div>
   </form>

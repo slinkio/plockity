@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     {
       _valName: 'appDomain',
       format: function (v) {
-        return (v) ? v.toLowerCase() : v;
+        return (v) ? 'http://' + v.toLowerCase().replace(/(\S.*\:\/\/)/gi, '').replace(/\s/g, '') : v;
       }
     }
   ],
@@ -67,7 +67,7 @@ export default Ember.Controller.extend({
 
       var app = this.store.createRecord('app', {
         name:    data.appName,
-        domain:  data.appDomain,
+        url:     data.appDomain,
         creator: currentUser,
         plan:    data.plan
       });
@@ -94,11 +94,8 @@ export default Ember.Controller.extend({
                 plan:           null
               });
             }, handleError); // currentUser.save()
-
           }, handleError); // currentUser.get('paymentMethod')
-
         }, handleError); // currentUser.get('app')
-
       }, handleError); // app.save()
 
       var handleError = function (res) {

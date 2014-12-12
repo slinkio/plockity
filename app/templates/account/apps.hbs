@@ -1,15 +1,19 @@
-<div class="item-list-wrapper">
-  <ul class="nav nav-tabs item-list-tabs" role="tablist">
-    <li><a href="#" role="tab" data-toggle="tab" {{action "showModal" 'add-app-modal' false 'body'}}><i class="fa fa-fw fa-plus"></i> Add Application...</a></li>
-  </ul>
-  <div class="apps list-group">
-    {{#each app in content}}
-      {{render "app-item" app}}
-    {{else}}
-      <div class="list-group-item">
-        <h2 class="text-center">No Apps. Click "Add Application" to add one. <i class="fa fa-fw fa-rotate-90 fa-mail-reply pull-right"></i></h2>
+<div class="row">
+  <div {{bind-attr class="showingApiKey:col-md-9:col-md-12"}}>
+    <div class="item-list-wrapper">
+      <ul class="nav nav-tabs item-list-tabs" role="tablist">
+        <li><a href="#" role="tab" data-toggle="tab" {{action "showModal" 'add-app-modal' false 'body'}}><i class="fa fa-fw fa-plus"></i> Add Application...</a></li>
+      </ul>
+      <div class="apps list-group">
+        {{#each app in content}}
+          {{render "app-item" app}}
+        {{else}}
+          <div class="list-group-item">
+            <h2 class="text-center">No Apps. Click "Add Application" to add one. <i class="fa fa-fw fa-rotate-90 fa-mail-reply pull-right"></i></h2>
+          </div>
+        {{/each}}
       </div>
-    {{/each}}
+    </div>
   </div>
 </div>
 
