@@ -1,6 +1,6 @@
-<div class="row">
-  <div {{bind-attr class="showingApiKey:col-md-9:col-md-12"}}>
-    <div class="item-list-wrapper">
+<div class="row row-no-margin">
+  <div {{bind-attr class="showKeysFor:col-md-8:col-md-12"}}>
+    <div {{bind-attr class="showKeysFor:side-by-side :item-list-wrapper"}}>
       <ul class="nav nav-tabs item-list-tabs" role="tablist">
         <li><a href="#" role="tab" data-toggle="tab" {{action "showModal" 'add-app-modal' false 'body'}}><i class="fa fa-fw fa-plus"></i> Add Application...</a></li>
       </ul>
@@ -13,6 +13,20 @@
           </div>
         {{/each}}
       </div>
+    </div>
+  </div>
+  <div {{bind-attr class="showKeysFor:col-md-4:hidden :key-panel"}}>
+    <div class="key-panel-content">
+      <h4>
+        API Keys for {{showKeysFor.name}}
+        <span class="pull-right">
+          <a href="#" {{action "hideKeys"}}>
+            <i class="fa fa-fw fa-times"></i>
+          </a>
+        </span>
+      </h4>
+      <hr />
+      {{app-api-key app=showKeysFor}}
     </div>
   </div>
 </div>

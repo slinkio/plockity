@@ -5,5 +5,6 @@ export default {
   initialize: function(container) {
     console.debug("Injecting store:main into session");
     container.typeInjection('session', 'store', 'store:main');
+    container.typeInjection('component', 'store', 'store:main');
   }
 };

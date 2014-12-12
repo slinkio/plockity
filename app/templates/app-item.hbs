@@ -1,6 +1,15 @@
 <div class="row">
   <div class="col-sm-4">
-    <h4>{{content.name}}</h4>
+    <h4>
+      <a href="#" {{action "showKeys" content}} class="tooltip-trigger" data-placement="bottom" title="API Keys">
+        <span class="fa-stack">
+          <i class="fa fa-fw fa-stack-2x fa-circle"></i>
+          <i class="fa fa-fw fa-stack-1x fa-key fa-inverse"></i>
+        </span>
+      </a>
+      <span class="label label-success">{{content.plan.title}}</span>
+      {{content.name}} 
+    </h4>
   </div>
   <div class="col-sm-4">
     {{progress-bar type="progress-bar-warning" striped=true min=0 max=content.plan.maxRequests value=content.requestsMade displayText=true unit="Used" class="progress-vert-cen"}}

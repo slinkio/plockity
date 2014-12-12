@@ -1,0 +1,17 @@
+{{#if keyError}}
+  <p class="text-center text-danger">
+    <i class="fa fa-fw fa-exclamation-triangle"></i> There was an error resetting your key.
+  </p>
+{{/if}}
+
+Vault API
+<div class="row">
+  <div class="col-xs-9 well-col">
+    <div class="well well-sm">
+      {{app.apiKey}}
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <a href="#" class="btn btn-warning" {{action "resetKey"}}>Reset</a>
+  </div>
+</div>

@@ -109,6 +109,14 @@ export default Ember.Controller.extend({
           loading: false
         });
       };
+    },
+
+    showKeys: function ( app ) {
+      this.set('showKeysFor', app);
+    },
+
+    hideKeys: function () {
+      this.set('showKeysFor', null);
     }
   }
 });

@@ -8,6 +8,7 @@ export default DS.Model.extend({
 
   usingDefault: attribute('boolean'),
   requestsMade: attribute('number'),
+  apiKey:       attribute('string'),
 
   // Relational
   plan:           DS.belongsTo('plan'),

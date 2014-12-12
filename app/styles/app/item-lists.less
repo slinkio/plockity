@@ -4,5 +4,36 @@
 
 .item-list-wrapper {
   margin: 0 auto;
-  width: 50%;
+  width: 70%;
+
+  &.side-by-side {
+    width: 90%;
+    margin: 0 0 0 auto;
+  }
+}
+
+.key-panel.col-md-4 {
+  margin: 0;
+  padding: 0 6% 0 0;
+
+  .key-panel-content {
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 16px 15px -5px rgba(0, 0, 0, 0.2);
+
+    .row {
+      margin: 0;
+
+      .well-col {
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .well {
+      background-color: white;
+      color: darken(@brand-warning, 10%);
+      overflow-x: auto;
+    }
+  }
 }
