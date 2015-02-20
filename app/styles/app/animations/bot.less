@@ -1,0 +1,141 @@
+/*
+  Animations/bot Styles
+*/
+
+@bot-color:       #FFFFFF;
+@bot-alt-color:   @brand-warning;
+@bot-body-width:  110px;
+@bot-arm-width:   unit(@bot-body-width * ( 2 / 3 ), px);
+@bot-arm-height:  15px;
+@bot-leg-height:  20px;
+@bot-leg-width:   10px;
+@bot-foot-height: 10px;
+@bot-foot-width:  18px;
+
+@default-border: 3px solid darken(@bot-color, 10%);
+
+.def-bot () {
+  background-color: @bot-color;
+  border: 3px solid darken(@bot-color, 10%);
+}
+
+.arm-rotation ( @deg ) {
+  .transform-prefix( rotate( @deg ) );
+}
+
+.wrapper {
+  background: #00CC7E;
+  height: 500px;
+  width: 90%;
+  padding: 50px;
+}
+
+.bot {
+  margin: 0 auto;
+  height: 200px;
+  width: 40%;
+  
+  .b-head, .b-body:after, .b-arm, .b-leg, .b-leg:before {
+    .def-bot();
+  }
+ 
+  .b-head {
+    position: relative;
+    margin: 0 auto;
+    width: 80px;
+    height: 70px;
+    border-radius: 15px 15px 0 0;
+
+    &:after { // Eyes/Mouth
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 10px;
+      height: 10px;
+      box-shadow:
+        15px 22px 0 fade(@bot-alt-color, 80%),
+        -15px 22px 0 fade(@bot-alt-color, 80%),
+        0px 45px 0 fade(@bot-alt-color, 80%),
+        10px 45px 0 fade(darken(@bot-alt-color, 10%), 80%),
+        -10px 45px 0 fade(darken(@bot-alt-color, 10%), 80%);
+    }
+  }
+  
+  .b-body {
+    position: relative;
+    margin: -2px auto 0 auto;
+    width: @bot-body-width + 6px; // + borders
+    
+    &:after {
+      content: '';
+      display: block;
+      width: @bot-body-width;
+      height: 120px;
+      border-radius: 15px 15px 50% 50%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .b-arm {
+      margin-top: 20px;
+      width: @bot-arm-width;
+      height: @bot-arm-height;
+      position: absolute;
+
+      @positioning: -@bot-arm-width + 3;
+
+      &:first-of-type {
+        left: @positioning;
+        transform-origin: right;
+        .animation(bot-arm-wave 0.3s ease-in-out 0s infinite alternate);
+      }
+
+      &:last-of-type {
+        right: @positioning;
+        transform-origin: left;
+        .arm-rotation(75deg);
+      }
+    }
+  }
+  .b-legs {
+    margin: -10px auto 0 auto;
+    text-align: center;
+ 
+    .b-leg {
+      display: inline-block;
+      position: relative;
+      margin: 20px auto;
+      width: @bot-foot-width;
+      height: @bot-foot-height;
+      padding: 0 5px;
+      
+      &:before {
+        content: '';
+        display: block;
+        margin: -26px auto;
+        width: @bot-leg-width;
+        height: @bot-leg-height;
+      }
+    }
+  }
+}
+
+@keyframes bot-arm-wave {
+  from { .arm-rotation( 30deg ); }
+  to   { .arm-rotation( 80deg ); }
+}
+
+@-moz-keyframes bot-arm-wave {
+  from { .arm-rotation( 30deg ); }
+  to   { .arm-rotation( 80deg ); }
+}
+
+@-webkit-keyframes bot-arm-wave {
+  from { .arm-rotation( 30deg ); }
+  to   { .arm-rotation( 80deg ); }
+}
+
+@-o-keyframes bot-arm-wave {
+  from { .arm-rotation( 30deg ); }
+  to   { .arm-rotation( 80deg ); }
+}
