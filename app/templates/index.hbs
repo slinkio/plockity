@@ -1,20 +1,28 @@
 <div class="hero hero-frontpage">
   <div class="hero-content margin-top">
-    {{!slide-show}}
-    {{plockity-bot}}
+    {{#slide-show}}
+      <div class="slide-container s-1">
+        {{plockity-bot}}
+        <div class="slide-text-container">
+          <h1>Meet Plockity Bot</h1>
+          <p>
+            Plockity Bot makes sure your data is safe and secure from anything and everything using blowfish ciphering.
+          </p>
+        </div>
+      </div>
+    {{/slide-show}}
   </div>
   <div class="initial-bg"></div>
   <div class="next-bg"></div>
+  <div class="constant-bg"></div>
 </div>
 
 <div class="content-wrapper">
-
   {{#unless session.authenticated}}
     {{render "dropin-signup"}}
   {{/unless}}
 
   <div class="row blerbs">
-
     <div class="col-md-4 blerb">
       <h1><i class="fa fa-fw fa-lock blerb-icon"></i> Secure</h1>
       <p>Extremely secure Blowfish ciphering keeps passwords safe and secure against brute force, rainbow table, and other hacking methods.</p>
@@ -29,7 +37,6 @@
       <h1><i class="fa fa-fw fa-cloud blerb-icon"></i> Try it for free</h1>
       <p>Enjoy peace of mind, secure data, and fast logins; up to 3K requests for free.</p>
     </div>
-
   </div>
   <hr />
 
@@ -60,7 +67,7 @@
         <var>ssn</var>: <var>'000-00-0000'</var>
       }, <strong>function</strong> (<var>err</var>, <var>result</var>) {
         if(err) {
-          <span class="text-danger">throw <strong>new Error</strong>(<var>err</var>);
+          <span class="text-danger">throw</span> <strong>new Error</strong>(<var>err</var>);
         }
         <span class="text-muted">// Do something else</span>
       });

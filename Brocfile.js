@@ -1,26 +1,28 @@
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var EmberApp  = require('ember-cli/lib/broccoli/ember-app'),
+    fs        = require('fs'),
+    vendorDir = JSON.parse(fs.readFileSync('./.bowerrc')).directory + '/';
 
-var app = new EmberApp();
-
-// Use this to add additional libraries to the generated output files.
-app.import({
-  development: 'vendor/ember-data/ember-data.js',
-  production:  'vendor/ember-data/ember-data.prod.js'
+var app = new EmberApp({
+  fingerprint: {
+    replaceExtensions: ['html', 'js', 'css', 'less']
+  },
 });
 
-/* Ember Data Adapter */
-app.import('vendor/ember-localstorage-adapter/localstorage_adapter.js');
+var bowerIncludes = [
+  'ember-localstorage-adapter/localstorage_adapter.js',
+  'fontawesome/css/font-awesome.css',
+  'nprogress/nprogress.css',
+  'bootstrap/dist/js/bootstrap.min.js',
+  'moment/moment.js',
+  'nprogress/nprogress.js',
+  'braintree/index.js',
+  'velocity/velocity.js'
+];
 
-/* Vendor CSS */
-app.import('vendor/fontawesome/css/font-awesome.css');
-app.import('vendor/nprogress/nprogress.css');
-
-/* Vendor JS */
-app.import('vendor/bootstrap/dist/js/bootstrap.min.js');
-app.import('vendor/moment/moment.js');
-app.import('vendor/nprogress/nprogress.js');
-app.import('vendor/braintree/index.js');
+bowerIncludes.forEach(function ( path ) {
+  app.import( vendorDir + path );
+});
 
 module.exports = app.toTree();

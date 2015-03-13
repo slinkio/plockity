@@ -1,16 +1,15 @@
 {
-  "predef": {
-    "document": true,
-    "window": true,
-    "PlockityENV": true,
-    "$": true,
-    "moment": true,
-    "Braintree": true,
-    "braintree": true,
-    "NProgress": true
-  },
-  "browser" : true,
-  "boss" : true,
+  "predef": [
+    "document",
+    "window",
+    "-Promise",
+    "$",
+    "moment",
+    "NProgress",
+    "braintree"
+  ],
+  "browser": true,
+  "boss": true,
   "curly": true,
   "debug": false,
   "devel": true,

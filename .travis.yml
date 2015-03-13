@@ -1,14 +1,20 @@
+---
 language: node_js
 
-node_js:
-- '0.10'
+sudo: false
+
+cache:
+  directories:
+    - node_modules
 
 before_install:
-- npm install npm -g
+  - "npm config set spin false"
+  - "npm install -g npm@^2"
 
-before_script:
-- bower install
+install:
+  - npm install -g bower
+  - npm install
+  - bower install
 
-after_success:
-- ember build env --environment=production
-- cd dist; find . -type f -exec curl -u $FUSR:$FPSW --ftp-create-dirs -T {} ftp://trust.associatedemployers.org/{} \;
+script:
+  - npm test

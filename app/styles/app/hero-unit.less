@@ -8,6 +8,9 @@
   width: 100%;
 
   .hero-content {
+    position: relative;
+    z-index: 2;
+
     h1, h2, h3, h4, h5, h6 {
       padding: 5px 10px;
       display: inline-block;
@@ -30,13 +33,17 @@
     .skew(0, -2deg);
     .backface-visibility(hidden);
 
-    .initial-bg, .next-bg {
+    .initial-bg, .next-bg, .constant-bg {
       position: absolute;
       .trbl();
     }
 
+    .initial-bg, .next-bg {
+      z-index: 1;
+    }
+
     .initial-bg {
-      .animation(backgroundindex 8s infinite);
+      .animation(backgroundindex 8s infinite alternate);
       background:
         linear-gradient(
           @brand-green-1,
@@ -56,7 +63,7 @@
 
     .next-bg {
       opacity: 0;
-      .animation(backgroundindex 8s 4s infinite);
+      .animation(backgroundindex 8s infinite alternate-reverse);
       background:
         linear-gradient(
           @brand-green-1,
@@ -70,6 +77,25 @@
         linear-gradient(
           -90deg,
           @brand-green-5,
+          transparent
+        );
+    }
+
+    .constant-bg {
+      opacity: 1;
+      background:
+        linear-gradient(
+          @brand-warning,
+          transparent
+        ),
+        linear-gradient(
+          90deg,
+          lighten(@brand-warning, 20%),
+          transparent
+        ),
+        linear-gradient(
+          -90deg,
+          @brand-default,
           transparent
         );
     }
