@@ -4,6 +4,7 @@
 
 .slide-show {
   padding: 75px 0;
+  .transition(~"height 0.35s ease-in-out");
 
   .slide-container {
     position: relative;
@@ -15,6 +16,7 @@
     padding: 30px;
     max-width: 50%;
     margin: 0 auto;
+    word-break: break-all;
 
     h1, h2, h3, h4 {
       background: none !important;
@@ -27,8 +29,4 @@
       text-shadow: 0 1px 0 fade(@brand-default, 80%);
     }
   }
-}
-
-.slide-show .s-1 {
-  text-align: center;
 }

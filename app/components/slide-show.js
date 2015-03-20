@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 
   delay: 6000,
   slides: [
+    // Slide 1
     {
       enter: function ( $el ) {
         return new Ember.RSVP.Promise(function ( resolve ) {
@@ -60,7 +61,81 @@ export default Ember.Component.extend({
           .velocity({
             translateY: '-500%'
           }, {
-            complete: resolve,
+            complete: function () {
+              $el.css({
+                display: 'none'
+              });
+
+              resolve();
+            },
+            duration: 1000
+          });
+        });
+      }
+    },
+    // Slide 2
+    {
+      enter: function ( $el ) {
+        return new Ember.RSVP.Promise(function ( resolve ) {
+          $el.css({
+            opacity: 0,
+            display: 'block'
+          })
+          .velocity({
+            opacity: 1
+          }, {
+            duration: 1500,
+          })
+          .find('.slide-text-container').velocity({
+            translateY: [ 0, '500%' ],
+            rotateZ:    [ 0, '500deg' ]
+          }, {
+            duration: 1000
+          });
+
+          $el.find('.server-container').css({
+            'transform-origin': 'bottom center'
+          })
+          .velocity({
+            translateY: [ 0, '-500%' ]
+          }, {
+            duration: 1000,
+            complete: resolve
+          })
+          .velocity({
+            rotateZ: [ '-10deg', 0 ]
+          }, {
+            duration: 1000
+          })
+          .velocity({
+            rotateZ: [ '10deg', '-10deg' ]
+          }, {
+            duration: 2000,
+            loop: true
+          });
+        });
+      },
+      exit: function ( $el ) {
+        return new Ember.RSVP.Promise(function ( resolve ) {
+          $el.find('.slide-text-container')
+          .velocity({
+            translateY: '500%'
+          },
+          {
+            duration: 1000
+          });
+          $el.find('.server-container')
+          .velocity('stop')
+          .velocity({
+            translateY: '-500%'
+          }, {
+            complete: function () {
+              $el.css({
+                display: 'none'
+              });
+
+              resolve();
+            },
             duration: 1000
           });
         });

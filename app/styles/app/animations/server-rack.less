@@ -1,0 +1,136 @@
+/*
+  Server Rack Styles
+*/
+
+@server-color:   #FFFFFF;
+@alt-color:      #FF1977;
+@indicator:      @alt-color;
+@indicator-alt:  #00CC7E;
+
+@server-width:       100px;
+@server-rack-height: 20px;
+@indicator-dim:      @server-rack-height / 2.5;
+
+@default-border: 3px solid darken(@server-color, 10%);
+
+.def () {
+  background-color: @server-color;
+  border: @default-border;
+}
+
+.wrapper {
+  background: #00CC7E;
+  height: 500px;
+  width: 90%;
+  padding: 50px;
+}
+
+.server {
+  margin: 0 auto;
+  width: @server-width;
+  .def();
+
+  .server-rack {
+    display: block;
+    height: @server-rack-height;
+    border: @default-border;
+    
+     // Indicator light
+    i {
+      display: block;
+      height: @indicator-dim;
+      width: @indicator-dim;
+      background-color: @indicator;
+      margin: (@server-rack-height - @indicator-dim) / 2;
+    }
+    
+    &:nth-child(even) i {
+      .animation(indicator-light 0.6s ease-in-out infinite);
+    }
+
+    &:nth-child(odd) i {
+      .animation(indicator-light 0.6s ease-in-out 0.4s infinite);
+    }
+  }
+}
+
+.server-connections {
+  @connector-size: @server-width / 30;
+
+  width: @server-width;
+  height: @connector-size;
+  margin: 0 auto;
+  margin-top: @server-rack-height;
+  .def();
+
+  &:before {
+    content: '';
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    margin-top: -(@server-rack-height + 3px);
+    width: @connector-size;
+    height: @server-rack-height;
+    background-color: @server-color;
+    border-left: @default-border;
+    border-right: @default-border;
+    z-index: 1;
+  }
+}
+
+
+@keyframes indicator-light {
+  5% {
+    background-color: @indicator;
+  }
+  20% {}
+  25% {
+    background-color: @indicator-alt;
+  }
+  60% {}
+  80% {
+    background-color: @indicator;
+  }
+}
+
+@-moz-keyframes indicator-light {
+  5% {
+    background-color: @indicator;
+  }
+  20% {}
+  25% {
+    background-color: @indicator-alt;
+  }
+  60% {}
+  80% {
+    background-color: @indicator;
+  }
+}
+
+@-webkit-keyframes indicator-light {
+  5% {
+    background-color: @indicator;
+  }
+  20% {}
+  25% {
+    background-color: @indicator-alt;
+  }
+  60% {}
+  80% {
+    background-color: @indicator;
+  }
+}
+
+@-o-keyframes indicator-light {
+  5% {
+    background-color: @indicator;
+  }
+  20% {}
+  25% {
+    background-color: @indicator-alt;
+  }
+  60% {}
+  80% {
+    background-color: @indicator;
+  }
+}
