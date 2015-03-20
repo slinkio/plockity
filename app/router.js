@@ -22,6 +22,10 @@ Router.map(function() {
     this.route('users', { path: 'users' });
     this.route('settings', { path: 'settings' });
   });
+  this.route('terms');
+  this.route('docs');
+  this.route('pricing');
+  this.route('support');
 });
 
 export default Router;

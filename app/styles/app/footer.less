@@ -26,6 +26,7 @@ footer.app-footer {
       .skew(0, 2deg);
 
       .content {
+        font-size: 80%;
         .skew(0, -2deg);
       }
     }
@@ -44,6 +45,29 @@ footer.app-footer {
       color: @brand-offwhite;
       font-weight: 100;
       margin: 0;
+      display: inline-block;
+    }
+
+    ul.footer-links {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        margin-left: 10px;
+
+        a {
+          color: @brand-warning;
+
+          &:before {
+            content: '\f105';
+            .fa();
+          }
+
+          &:hover {
+            color: lighten(@brand-warning, 20%);
+          }
+        }
+      }
     }
 
   }
