@@ -1,0 +1,20 @@
+{{#each plans as |plan|}}
+  <div class="col-md-4 plan">
+    <div class="content">
+      <div class="plan-header">
+        <h2>
+          {{plan.title}}<br />
+          <small>{{plan.tagline}}</small>
+        </h2>
+        <span class="price">{{#if plan.price}}${{plan.price}}/month{{else}}FREE{{/if}}</span>
+      </div>
+      <div class="plan-features">
+        <ul>
+        {{#each plan.features as |feature|}}
+          <li>{{feature}}</li>
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+{{/each}}

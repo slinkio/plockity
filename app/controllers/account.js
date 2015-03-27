@@ -9,6 +9,12 @@ export default Ember.Controller.extend({
     },
     'account.apps': {
       description: "Manage Applications"
+    },
+    'account.billing': {
+      description: "Billing"
+    },
+    'account.settings': {
+      description: "Account Settings"
     }
   },
 

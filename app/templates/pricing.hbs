@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="container">
+  <h1>Pricing</h1>
+  {{pricing-tables-display plans=model}}
+  <p class="text-center text-muted">
+    {{#link-to 'contact'}}Contact us{{/link-to}} for higher-volume pricing
+  </p>
+</div>
