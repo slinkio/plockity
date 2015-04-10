@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h4><i class="fa fa-fw fa-user"></i> Account</h4>
+      <p>
+        {{session.currentUser.fullName}}<br />
+        {{#if session.currentUser.companyName}}
+          <i class="fa fa-fw fa-building"></i> {{session.currentUser.companyName}}<br />
+        {{/if}}
+        <i class="fa fa-fw fa-at"></i> {{session.currentUser.email}}
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h4><i class="fa fa-fw fa-lock"></i> Vault Documents</h4>
+      <p>
+        {{vaultCount.total}} Vault Documents<br />
+        {{vaultCount.dataNodes.total}} Data Nodes<br />
+        {{vaultCount.dataNodes.encrypted}} Encrypted Data Nodes<br />
+        {{vaultCount.dataNodes.unencrypted}} Un-Encrypted Data Nodes
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h4><i class="fa fa-fw fa-terminal"></i> Apps</h4>
+      <p>
+        {{session.currentUser._data.app.length}} Total Apps
+      </p>
+    </div>
+  </div>
+</div>

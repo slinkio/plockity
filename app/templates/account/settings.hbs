@@ -21,7 +21,15 @@
             </div>
             <hr />
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block" {{bind-attr disabled=notAllowChangePassword}}>Change Password</button>
+              {{#if passwordSuccess}}
+                <p class="text-center text-success"><i class="fa fa-fw fa-check"></i> {{passwordSuccess}}</p>
+              {{/if}}
+              <button type="submit" class="btn btn-primary btn-block" {{bind-attr disabled=notAllowChangePassword}}>
+                Change Password
+                {{#if savingPassword}}
+                  <i class="fa fa-fw fa-spin fa-spinner"></i>
+                {{/if}}
+              </button>
             </div>
           </form>
         </div>

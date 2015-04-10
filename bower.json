@@ -14,10 +14,10 @@
     "qunit": "~1.17.1",
     "bootstrap": "~3.2.0",
     "nprogress": "~0.1.6",
-    "fontawesome": "~4.1.0",
     "moment": "~2.7.0",
     "ember-localstorage-adapter": "~0.3.2",
     "braintree": "https://js.braintreegateway.com/v2/braintree.js",
-    "velocity": "~1.2.2"
+    "velocity": "~1.2.2",
+    "fontawesome": "~4.3.0"
   }
 }
