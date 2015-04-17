@@ -31,7 +31,7 @@
     {{render "dropin-signup"}}
   {{/unless}}
 
-  <div class="row blerbs">
+  <div class="row blerbs container">
     <div class="col-md-4 blerb">
       <h1><i class="fa fa-fw fa-lock blerb-icon"></i> Secure</h1>
       <p>Extremely secure Blowfish ciphering keeps passwords safe and secure against brute force, rainbow table, and other hacking methods.</p>
@@ -47,59 +47,58 @@
       <p>Enjoy peace of mind, secure data, and fast logins; up to 3K requests for free.</p>
     </div>
   </div>
-  <hr />
 
-  <div class="callout callout-code">
+  <div class="container callout callout-code">
     <h1><i class="fa fa-fw fa-code"></i> Easy to install and use</h1>
     <hr />
-    <p>This example is for <strong>Node.js</strong>. See our <a href="#">api docs</a> for interfacing directly with plockity.</p>
-    
-    <h3>Install</h3>
-    <p>With npm installed run the following in your node project.</p>
-    <code>npm install plockity --save</code>
-    <p class="help-block">Adding the <code>--save</code> flag adds plockity to your <code>package.json</code> file.</p>
-
-    <h3>Configure</h3>
-    <p>Make sure you have your app key handy.</p>
-    <pre>
-      <strong>var</strong> <var>plockity</var> = <strong>require</strong>('<var>plockity</var>');<br />
-      plockity.<strong>config</strong>({
-        <var>app</var>: <var>'KaqUL7TKfTyplbzpY7Cw3ugZlu2VoQ6G4kYiR'</var> <span class="text-muted">// Your app key here</span>
-      });
-    </pre>
-
-    <h3>Store</h3>
-    <p>Pass a plain-text key (like an email address), and the data to be encrypted.</p>
-    <pre>
-      plockity.<strong>save</strong>(<var>'user@example.com'</var>, {
-        <var>password</var>: <var>'userpassword',</var>
-        <var>ssn</var>: <var>'000-00-0000'</var>
-      }, <strong>function</strong> (<var>err</var>, <var>result</var>) {
-        if(err) {
-          <span class="text-danger">throw</span> <strong>new Error</strong>(<var>err</var>);
-        }
-        <span class="text-muted">// Do something else</span>
-      });
-    </pre>
-
-    <h3>Compare</h3>
-    <pre>
-      plockity.<strong>compare</strong>(<var>'user@example.com'</var>, {
-        <var>password</var>: <var>'userpass',</var>
-        <var>ssn</var>: <var>'000-00-0000'</var>
-      }, <strong>function</strong> (<var>err</var>, <var>result</var>) {
-        if(<var>err</var>) {
-          <span class="text-danger"><strong>throw</strong> <strong>new Error</strong></span>(<var>err</var>);
-        }
-        console.<strong>log</strong>(<var>result.password</var>); <span class="text-muted">// Logs <strong>false</strong> because <i>userpass</i> isn't <i>userpassword</i></span>
-        console.<strong>log</strong>(<var>result.ssn</var>); <span class="text-muted">// Logs <strong>true</strong> because the ssn matches</span>
-      });
-
-      <span class="text-muted">// Or use a single value</span>
-
-      var same = plockity.<strong>compare</strong>(<var>'user@example.com'</var>, 'password', 'userpass');
-      console.<strong>log</strong>(<var>same</var>); <span class="text-muted">// Logs <strong>false</strong> because <i>userpass</i> isn't <i>userpassword</i></span>
-    </pre>
+    <p class="text-center">
+      <i class="fa fa-fw fa-info-circle"></i> This example is for <strong>Node.js</strong>. See our {{#link-to 'docs'}}api docs{{/link-to}} for interfacing directly with the Plockity API or for more Node.js examples.
+    </p>
+    <hr />
+    <section class="code-section text-center">
+      <h3><i class="fa fa-fw fa-download"></i> Install</h3>
+      <p>With npm installed run the following in your node project.</p>
+      <code>npm install plockity --save</code>
+      <p class="help-block">Adding the <code>--save</code> flag adds plockity to your <code>package.json</code> file.</p>
+    </section>
+    <hr />
+    <section class="code-section">
+      <h3><i class="fa fa-fw fa-plug"></i> Config &amp; Connect</h3>
+      <p>Make sure you have your app key handy.</p>
+      <div class="markdown-body">
+        <div class="highlight highlight-javascript">
+          <pre><span class="pl-k">var</span> PlockityAdapter <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>plockity-node<span class="pl-pds">'</span></span>);<br /><span class="pl-k">var</span> plockityApp <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">PlockityAdapter</span>({<br />  apiKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>myAPIKey<span class="pl-pds">'</span></span><br />});</pre>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <section class="code-section">
+      <h3><i class="fa fa-fw fa-cloud-upload"></i> Insert</h3>
+      <p>Pass a plain-text key (like an email address), and the data to be encrypted.</p>
+      <div class="markdown-body">
+        <div class="highlight highlight-javascript">
+          <pre>locker.vault.insert(<span class="pl-s"><span class="pl-pds">'</span>mydatakey<span class="pl-pds">'</span></span>, {<br />  ssn<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>123456789<span class="pl-pds">'</span></span>,<br />  name<span class="pl-k">:</span> {<br />    first<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>willy<span class="pl-pds">'</span></span>,<br />    last<span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">'</span>wonka<span class="pl-pds">'</span></span><br />  }<br />}, {<br />  disableEncryption<span class="pl-k">:</span> [<br />    <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span><br />  ]<br />}).then(<span class="pl-k">function</span> ( <span class="pl-smi">result</span> ) {<br />  <span class="pl-en">console</span><span class="pl-c1">.log</span>( result.<span class="pl-c1">name</span>.first ); <span class="pl-c">// "willy"</span><br />  <span class="pl-en">console</span><span class="pl-c1">.log</span>( result.ssn );        <span class="pl-c">// undefined</span><br />}).catch(handleError);<br /></pre>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <section class="code-section">
+      <h3><i class="fa fa-fw fa-pencil"></i> Update</h3>
+      <div class="markdown-body">
+        <div class="highlight highlight-javascript">
+          <pre>plockityApp.vault.update(<span class="pl-s"><span class="pl-pds">'</span>mydatakey<span class="pl-pds">'</span></span>, { ssn<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>123456788<span class="pl-pds">'</span></span> }).then(<span class="pl-k">function</span> ( <span class="pl-smi">result</span> ) {<br /><span class="pl-c">  // Do something with the result</span><br />}).catch(handleError);</pre>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <section class="code-section">
+      <h3><i class="fa fa-fw fa-search"></i> Compare</h3>
+      <div class="markdown-body">
+        <div class="highlight highlight-javascript">
+          <pre>plockityApp.vault.compare(<span class="pl-s"><span class="pl-pds">'</span>mydatakey<span class="pl-pds">'</span></span>, { ssn<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>123456789<span class="pl-pds">'</span></span>, name<span class="pl-k">:</span> { first<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>willy<span class="pl-pds">"</span></span> } }).then(<span class="pl-k">function</span> ( <span class="pl-smi">result</span> ) {<br />  <span class="pl-en">console</span><span class="pl-c1">.log</span>( result.ssn );        <span class="pl-c">// false</span><br />  <span class="pl-en">console</span><span class="pl-c1">.log</span>( result.<span class="pl-c1">name</span>.first ); <span class="pl-c">// true</span><br />}).catch(handleError);</pre>
+        </div>
+      </div>
+    </section>
 
   </div>
 </div>{{! ./ Content wrapper }}

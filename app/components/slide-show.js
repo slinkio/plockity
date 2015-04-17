@@ -19,7 +19,7 @@ export default Ember.Component.extend({
             duration: 1500,
           })
           .find('.slide-text-container').velocity({
-            translateY: [ 0, '500%' ],
+            translateX: [ 0, '500%' ],
             rotateZ:    [ 0, '500deg' ]
           }, {
             duration: 1000
@@ -29,7 +29,7 @@ export default Ember.Component.extend({
             'transform-origin': 'bottom center'
           })
           .velocity({
-            translateY: [ 0, '-500%' ]
+            translateX: [ 0, '-500%' ]
           }, {
             duration: 1000,
             complete: resolve
@@ -51,7 +51,7 @@ export default Ember.Component.extend({
         return new Ember.RSVP.Promise(function ( resolve ) {
           $el.find('.slide-text-container')
           .velocity({
-            translateY: '500%'
+            translateX: '500%'
           },
           {
             duration: 1000
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
           $el.find('.bot')
           .velocity('stop')
           .velocity({
-            translateY: '-500%'
+            translateX: '-500%'
           }, {
             complete: function () {
               $el.css({
@@ -87,7 +87,7 @@ export default Ember.Component.extend({
             duration: 1500,
           })
           .find('.slide-text-container').velocity({
-            translateY: [ 0, '500%' ],
+            translateX: [ 0, '500%' ],
             rotateZ:    [ 0, '500deg' ]
           }, {
             duration: 1000
@@ -97,7 +97,7 @@ export default Ember.Component.extend({
             'transform-origin': 'bottom center'
           })
           .velocity({
-            translateY: [ 0, '-500%' ]
+            translateX: [ 0, '-500%' ]
           }, {
             duration: 1000,
             complete: resolve
@@ -119,7 +119,7 @@ export default Ember.Component.extend({
         return new Ember.RSVP.Promise(function ( resolve ) {
           $el.find('.slide-text-container')
           .velocity({
-            translateY: '500%'
+            translateX: '500%'
           },
           {
             duration: 1000
@@ -127,7 +127,7 @@ export default Ember.Component.extend({
           $el.find('.server-container')
           .velocity('stop')
           .velocity({
-            translateY: '-500%'
+            translateX: '-500%'
           }, {
             complete: function () {
               $el.css({
